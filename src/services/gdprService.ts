@@ -59,7 +59,7 @@ export const gdprService = {
     id: string,
     status: "pending" | "in_progress" | "completed" | "rejected",
     updates?: {
-      response_data?: Record<string, unknown>;
+      response_data?: any;
       rejection_reason?: string;
       notes?: string;
     }
@@ -67,7 +67,7 @@ export const gdprService = {
     const updateData: Partial<DSAR> = {
       status,
       updated_at: new Date().toISOString(),
-      ...updates,
+      ...(updates as any),
     };
 
     if (status === "completed") {
@@ -95,9 +95,9 @@ export const gdprService = {
     const [profiles, verifications, cases, consents, audits] = await Promise.all([
       supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
       supabase.from("verifications").select("*").eq("user_id", userId),
-      supabase.from("cases").select("*").eq("requester_id", userId),
+      supabase.from("cases").select("*").eq("created_by", userId),
       supabase.from("consent_records").select("*").eq("user_id", userId),
-      supabase.from("audit_logs").select("*").eq("user_id", userId),
+      supabase.from("access_audit_log").select("*").eq("user_id", userId),
     ]);
 
     return {

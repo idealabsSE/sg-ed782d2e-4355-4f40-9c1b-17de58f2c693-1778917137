@@ -79,7 +79,7 @@ export default function GDPRDashboard() {
     }
   };
 
-  const handleUpdateDSAR = async (id: string, status: DSAR["status"]) => {
+  const handleUpdateDSAR = async (id: string, status: "pending" | "in_progress" | "completed" | "rejected") => {
     try {
       await gdprService.updateDSARStatus(id, status);
       loadData();
