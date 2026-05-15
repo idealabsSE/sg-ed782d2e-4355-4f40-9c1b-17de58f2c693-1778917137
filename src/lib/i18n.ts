@@ -130,7 +130,23 @@ export type TranslationKey =
   | "ownership.match.success"
   | "ownership.match.successDesc"
   | "ownership.match.failed"
-  | "ownership.match.failedDesc";
+  | "ownership.match.failedDesc"
+  | "admin.page.title"
+  | "admin.page.description"
+  | "admin.page.heading"
+  | "admin.page.subheading"
+  | "admin.property"
+  | "admin.ownership.matched"
+  | "admin.ownership.pending"
+  | "admin.ownership.mismatch"
+  | "admin.review.note"
+  | "admin.review.notePlaceholder"
+  | "admin.review.noteHelp"
+  | "admin.review.approve"
+  | "admin.review.reject"
+  | "admin.review.flag"
+  | "admin.review.cancel"
+  | "admin.review.review";
 
 const translations: Record<Locale, Record<TranslationKey, string>> = {
   en: {
@@ -257,6 +273,22 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "ownership.match.successDesc": "The registry owner matches the verified host identity",
     "ownership.match.failed": "Ownership Mismatch",
     "ownership.match.failedDesc": "The registry owner does not match the verified host identity",
+    "admin.page.title": "Reviewer Operations - TrustPlatform",
+    "admin.page.description": "Review and approve verification cases",
+    "admin.page.heading": "Reviewer Queue",
+    "admin.page.subheading": "Review pending verification cases and make approval decisions",
+    "admin.property": "Property",
+    "admin.ownership.matched": "Matched",
+    "admin.ownership.pending": "Pending Review",
+    "admin.ownership.mismatch": "Mismatch",
+    "admin.review.note": "Review Note",
+    "admin.review.notePlaceholder": "Enter your review decision and rationale...",
+    "admin.review.noteHelp": "Required: Document your decision for audit trail",
+    "admin.review.approve": "Approve Case",
+    "admin.review.reject": "Reject Case",
+    "admin.review.flag": "Flag for Investigation",
+    "admin.review.cancel": "Cancel",
+    "admin.review.review": "Review Case",
   },
   sv: {
     "nav.home": "Hem",
@@ -382,6 +414,22 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "ownership.match.successDesc": "Registerägaren matchar den verifierade värdidentiteten",
     "ownership.match.failed": "Ägarmatchning Misslyckades",
     "ownership.match.failedDesc": "Registerägaren matchar inte den verifierade värdidentiteten",
+    "admin.page.title": "Granskaroperationer - TrustPlatform",
+    "admin.page.description": "Granska och godkänn verifieringsärenden",
+    "admin.page.heading": "Granskarkö",
+    "admin.page.subheading": "Granska väntande verifieringsärenden och fatta godkännandebeslut",
+    "admin.property": "Fastighet",
+    "admin.ownership.matched": "Matchad",
+    "admin.ownership.pending": "Väntar på Granskning",
+    "admin.ownership.mismatch": "Icke-matchad",
+    "admin.review.note": "Granskningsanteckning",
+    "admin.review.notePlaceholder": "Ange ditt granskningsbeslut och motivering...",
+    "admin.review.noteHelp": "Obligatoriskt: Dokumentera ditt beslut för revisionsspår",
+    "admin.review.approve": "Godkänn Ärende",
+    "admin.review.reject": "Avvisa Ärende",
+    "admin.review.flag": "Flagga för Utredning",
+    "admin.review.cancel": "Avbryt",
+    "admin.review.review": "Granska Ärende",
   },
   es: {
     "nav.home": "Inicio",
@@ -507,6 +555,22 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "ownership.match.successDesc": "El propietario del registro coincide con la identidad del anfitrión verificado",
     "ownership.match.failed": "Desajuste de Propiedad",
     "ownership.match.failedDesc": "El propietario del registro no coincide con la identidad del anfitrión verificado",
+    "admin.page.title": "Operaciones de Revisión - TrustPlatform",
+    "admin.page.description": "Revisa y aprueba casos de verificación",
+    "admin.page.heading": "Cola de Revisión",
+    "admin.page.subheading": "Revisa casos de verificación pendientes y toma decisiones de aprobación",
+    "admin.property": "Propiedad",
+    "admin.ownership.matched": "Coincide",
+    "admin.ownership.pending": "Pendiente de Revisión",
+    "admin.ownership.mismatch": "No Coincide",
+    "admin.review.note": "Nota de Revisión",
+    "admin.review.notePlaceholder": "Ingresa tu decisión de revisión y justificación...",
+    "admin.review.noteHelp": "Obligatorio: Documenta tu decisión para auditoría",
+    "admin.review.approve": "Aprobar Caso",
+    "admin.review.reject": "Rechazar Caso",
+    "admin.review.flag": "Marcar para Investigación",
+    "admin.review.cancel": "Cancelar",
+    "admin.review.review": "Revisar Caso",
   },
 };
 

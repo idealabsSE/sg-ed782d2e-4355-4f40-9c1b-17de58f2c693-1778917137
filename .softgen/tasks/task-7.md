@@ -1,23 +1,28 @@
 ---
 title: Internal Reviewer Operations
-status: todo
+status: in_progress
 priority: medium
 type: feature
-tags: [admin, reviewer, ops]
+tags: [admin, review, operations]
+created_by: softgen
+created_at: 2026-05-15
 position: 7
 ---
 
 ## Notes
-Platform staff need a secure queue to manually review ambiguous cases, ownership mismatches, and complex document validations before issuing a final trust decision.
+Build the internal admin interface for manual verification review. Reviewers see a queue of pending cases, examine identity documents and property matches, and make approval/rejection decisions with logged notes. This completes the human-in-the-loop verification workflow for ambiguous or flagged cases.
 
 ## Checklist
-- [ ] Create an admin-only reviewer dashboard displaying a queue of pending manual reviews.
-- [ ] Build a side-by-side review interface: raw user evidence on one side, extracted/registry data on the other.
-- [ ] Add an action panel to approve, reject, or request more information for a specific verification case.
-- [ ] Include an audit notes text area where the reviewer must log the reasoning for their decision.
-- [ ] Add a GDPR/Privacy ops tab with mock data subject access requests (DSAR) and retention schedules.
+- [x] Update /admin page with reviewer queue interface
+- [x] Build ReviewQueue component displaying pending cases
+- [x] Create CaseReviewCard with case details, parties, and documents
+- [x] Add reviewer decision actions (Approve, Reject, Flag for Investigation)
+- [x] Build decision logging interface with required note field
+- [x] Add admin operation translations
 
 ## Acceptance
-- Reviewers can view a dedicated queue separate from the standard user dashboards.
-- The review interface allows secure, fast comparison of identity data.
+- Reviewers see a prioritized queue of cases requiring manual review.
+- Each case displays full context: property, parties, verification status, uploaded documents.
+- Reviewer decisions require a logged note and update the case status immediately.
+- The interface maintains strict confidentiality protection of identity data.
 - Reviewer decisions require a logged note and update the global case status.

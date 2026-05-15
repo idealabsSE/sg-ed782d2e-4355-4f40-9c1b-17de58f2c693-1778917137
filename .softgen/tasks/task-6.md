@@ -1,6 +1,6 @@
 ---
 title: Nota Simple Ownership Workflow
-status: in_progress
+status: done
 priority: medium
 type: feature
 tags: [ownership, verification, registry]
