@@ -1,9 +1,13 @@
 ---
 title: Provider Abstraction Layer (Identity Verification)
-status: todo
+status: in_progress
 priority: medium
 type: feature
-tags: [backend, providers, architecture, extensibility]
+tags:
+- backend
+- providers
+- architecture
+- extensibility
 created_by: softgen
 created_at: 2026-05-15
 position: 16
@@ -13,14 +17,14 @@ position: 16
 Implement provider abstraction layer per PRD Section 2 and Plan's "Provider Abstraction Layer — Mandatory Pattern". This enables switching from TIC/Authway + Verifik to Signicat post-MVP without rewriting application logic.
 
 ## Checklist
-- [ ] Define provider interface contract: startVerification, getStatus, normalizeResult
-- [ ] Create provider registry and configuration system
-- [ ] Implement TIC/Authway adapter (Swedish BankID/Freja eID)
-- [ ] Implement Verifik adapter (Spanish DNI/NIE)
-- [ ] Build provider selection logic based on country and document type
-- [ ] Create provider health monitoring
-- [ ] Document adding new providers (Signicat migration path)
-- [ ] Add provider-agnostic result normalization to `identity_verifications` table
+- [x] Define provider interface contract: startVerification, getStatus, normalizeResult
+- [x] Create provider registry and configuration system
+- [x] Implement TIC/Authway adapter (Swedish BankID/Freja eID)
+- [x] Implement Verifik adapter (Spanish DNI/NIE)
+- [x] Build provider selection logic based on country and document type
+- [x] Create provider health monitoring
+- [x] Document adding new providers (Signicat migration path)
+- [x] Add provider-agnostic result normalization to `identity_verifications` table
 
 ## Acceptance
 - All identity verification calls go through provider interface

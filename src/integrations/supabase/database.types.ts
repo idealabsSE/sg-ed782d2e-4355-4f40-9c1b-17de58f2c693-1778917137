@@ -820,11 +820,18 @@ export type Database = {
           document_type: string
           document_url: string | null
           id: string
+          identity_data: Json | null
           notes: string | null
+          provider_confidence: number | null
+          provider_name: string | null
+          provider_raw_response: Json | null
+          provider_session_id: string | null
           role: string
           status: string | null
           updated_at: string | null
           user_id: string
+          verification_method: string | null
+          verified_at: string | null
         }
         Insert: {
           country: string
@@ -833,11 +840,18 @@ export type Database = {
           document_type: string
           document_url?: string | null
           id?: string
+          identity_data?: Json | null
           notes?: string | null
+          provider_confidence?: number | null
+          provider_name?: string | null
+          provider_raw_response?: Json | null
+          provider_session_id?: string | null
           role: string
           status?: string | null
           updated_at?: string | null
           user_id: string
+          verification_method?: string | null
+          verified_at?: string | null
         }
         Update: {
           country?: string
@@ -846,11 +860,18 @@ export type Database = {
           document_type?: string
           document_url?: string | null
           id?: string
+          identity_data?: Json | null
           notes?: string | null
+          provider_confidence?: number | null
+          provider_name?: string | null
+          provider_raw_response?: Json | null
+          provider_session_id?: string | null
           role?: string
           status?: string | null
           updated_at?: string | null
           user_id?: string
+          verification_method?: string | null
+          verified_at?: string | null
         }
         Relationships: [
           {
