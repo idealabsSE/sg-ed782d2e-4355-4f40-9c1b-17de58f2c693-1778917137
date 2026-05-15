@@ -40,6 +40,7 @@ export type TranslationKey =
   | "property.profile.propertyType"
   | "property.profile.municipality"
   | "property.profile.province"
+  | "property.profile.region"
   | "property.profile.licenseNumber"
   | "property.profile.nextStep"
   | "property.profile.status.verified"
@@ -146,7 +147,24 @@ export type TranslationKey =
   | "admin.review.reject"
   | "admin.review.flag"
   | "admin.review.cancel"
-  | "admin.review.review";
+  | "admin.review.review"
+  | "common.error"
+  | "common.loading"
+  | "common.submitting"
+  | "identity.submission.error"
+  | "identity.submission.success"
+  | "identity.submission.successDesc"
+  | "admin.review.approved"
+  | "admin.review.approvedDesc"
+  | "admin.review.rejected"
+  | "admin.review.rejectedDesc"
+  | "admin.review.flagged"
+  | "admin.review.flaggedDesc"
+  | "admin.noCases"
+  | "admin.noCasesDesc"
+  | "cases.noCases"
+  | "cases.noCasesDesc"
+  | "cases.createFirst";
 
 const translations: Record<Locale, Record<TranslationKey, string>> = {
   en: {
@@ -182,6 +200,7 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.profile.propertyType": "Property Type",
     "property.profile.municipality": "Municipality",
     "property.profile.province": "Province",
+    "property.profile.region": "Region",
     "property.profile.licenseNumber": "Tourist License",
     "property.profile.nextStep": "Continue to Identity Verification",
     "property.profile.status.verified": "Verified",
@@ -289,6 +308,23 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "admin.review.flag": "Flag for Investigation",
     "admin.review.cancel": "Cancel",
     "admin.review.review": "Review Case",
+    "common.error": "An error occurred",
+    "common.loading": "Loading...",
+    "common.submitting": "Submitting...",
+    "identity.submission.error": "Submission Failed",
+    "identity.submission.success": "Verification Submitted",
+    "identity.submission.successDesc": "Your identity verification has been submitted successfully.",
+    "admin.review.approved": "Case Approved",
+    "admin.review.approvedDesc": "The case has been approved.",
+    "admin.review.rejected": "Case Rejected",
+    "admin.review.rejectedDesc": "The case has been rejected.",
+    "admin.review.flagged": "Case Flagged",
+    "admin.review.flaggedDesc": "The case has been flagged for investigation.",
+    "admin.noCases": "No pending cases",
+    "admin.noCasesDesc": "There are no cases waiting for review at this time.",
+    "cases.noCases": "No cases yet",
+    "cases.noCasesDesc": "You haven't created or been invited to any cases yet.",
+    "cases.createFirst": "Create your first case",
   },
   sv: {
     "nav.home": "Hem",
@@ -323,6 +359,7 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.profile.propertyType": "Fastighetstyp",
     "property.profile.municipality": "Kommun",
     "property.profile.province": "Provins",
+    "property.profile.region": "Region",
     "property.profile.licenseNumber": "Turistlicens",
     "property.profile.nextStep": "Fortsätt till Identitetsverifiering",
     "property.profile.status.verified": "Verifierad",
@@ -430,6 +467,23 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "admin.review.flag": "Flagga för Utredning",
     "admin.review.cancel": "Avbryt",
     "admin.review.review": "Granska Ärende",
+    "common.error": "Ett fel uppstod",
+    "common.loading": "Laddar...",
+    "common.submitting": "Skickar...",
+    "identity.submission.error": "Inskickning Misslyckades",
+    "identity.submission.success": "Verifiering Inskickad",
+    "identity.submission.successDesc": "Din identitetsverifiering har skickats in framgångsrikt.",
+    "admin.review.approved": "Ärende Godkänt",
+    "admin.review.approvedDesc": "Ärendet har godkänts.",
+    "admin.review.rejected": "Ärende Avvisat",
+    "admin.review.rejectedDesc": "Ärendet har avvisats.",
+    "admin.review.flagged": "Ärende Flaggat",
+    "admin.review.flaggedDesc": "Ärendet har flaggats för utredning.",
+    "admin.noCases": "Inga väntande ärenden",
+    "admin.noCasesDesc": "Det finns inga ärenden som väntar på granskning just nu.",
+    "cases.noCases": "Inga ärenden ännu",
+    "cases.noCasesDesc": "Du har inte skapat eller bjudits in till några ärenden ännu.",
+    "cases.createFirst": "Skapa ditt första ärende",
   },
   es: {
     "nav.home": "Inicio",
@@ -464,6 +518,7 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.profile.propertyType": "Tipo de Propiedad",
     "property.profile.municipality": "Municipio",
     "property.profile.province": "Provincia",
+    "property.profile.region": "Región",
     "property.profile.licenseNumber": "Licencia Turística",
     "property.profile.nextStep": "Continuar a Verificación de Identidad",
     "property.profile.status.verified": "Verificado",
@@ -571,6 +626,23 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "admin.review.flag": "Marcar para Investigación",
     "admin.review.cancel": "Cancelar",
     "admin.review.review": "Revisar Caso",
+    "common.error": "Ocurrió un error",
+    "common.loading": "Cargando...",
+    "common.submitting": "Enviando...",
+    "identity.submission.error": "Envío Fallido",
+    "identity.submission.success": "Verificación Enviada",
+    "identity.submission.successDesc": "Tu verificación de identidad se ha enviado con éxito.",
+    "admin.review.approved": "Caso Aprobado",
+    "admin.review.approvedDesc": "El caso ha sido aprobado.",
+    "admin.review.rejected": "Caso Rechazado",
+    "admin.review.rejectedDesc": "El caso ha sido rechazado.",
+    "admin.review.flagged": "Caso Marcado",
+    "admin.review.flaggedDesc": "El caso ha sido marcado para investigación.",
+    "admin.noCases": "No hay casos pendientes",
+    "admin.noCasesDesc": "No hay casos en espera de revisión en este momento.",
+    "cases.noCases": "Aún no hay casos",
+    "cases.noCasesDesc": "Todavía no has creado ni te han invitado a ningún caso.",
+    "cases.createFirst": "Crea tu primer caso",
   },
 };
 

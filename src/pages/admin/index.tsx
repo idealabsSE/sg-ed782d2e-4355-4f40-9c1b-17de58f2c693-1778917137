@@ -234,9 +234,9 @@ export default function AdminPage() {
                               <span className="text-sm font-medium">
                                 {tenant.profile?.full_name || tenant.profile?.email || "Unknown"}
                               </span>
-                              {tenant.verification && (
-                                <Badge variant={getStatusVariant(tenant.verification.status)} className="ml-auto">
-                                  {getStatusIcon(tenant.verification.status)}
+                              {tenant.verification_status && (
+                                <Badge variant={getStatusVariant(tenant.verification_status)} className="ml-auto">
+                                  {getStatusIcon(tenant.verification_status)}
                                 </Badge>
                               )}
                             </div>
@@ -251,9 +251,9 @@ export default function AdminPage() {
                               <span className="text-sm font-medium">
                                 {host.profile?.full_name || host.profile?.email || "Unknown"}
                               </span>
-                              {host.verification && (
-                                <Badge variant={getStatusVariant(host.verification.status)} className="ml-auto">
-                                  {getStatusIcon(host.verification.status)}
+                              {host.verification_status && (
+                                <Badge variant={getStatusVariant(host.verification_status)} className="ml-auto">
+                                  {getStatusIcon(host.verification_status)}
                                 </Badge>
                               )}
                             </div>

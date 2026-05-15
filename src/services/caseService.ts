@@ -10,7 +10,6 @@ export interface CaseWithDetails extends Case {
   property?: Database["public"]["Tables"]["properties"]["Row"];
   parties?: (CaseParty & {
     profile?: Database["public"]["Tables"]["profiles"]["Row"];
-    verification?: Database["public"]["Tables"]["verifications"]["Row"];
   })[];
 }
 
@@ -39,8 +38,7 @@ export const caseService = {
           property:properties(*),
           parties:case_parties(
             *,
-            profile:profiles(*),
-            verification:verifications(*)
+            profile:profiles(*)
           )
         `
         )
@@ -77,8 +75,7 @@ export const caseService = {
           property:properties(*),
           parties:case_parties(
             *,
-            profile:profiles(*),
-            verification:verifications(*)
+            profile:profiles(*)
           )
         `
         )
@@ -217,8 +214,7 @@ export const caseService = {
           property:properties(*),
           parties:case_parties(
             *,
-            profile:profiles(*),
-            verification:verifications(*)
+            profile:profiles(*)
           )
         `
         )

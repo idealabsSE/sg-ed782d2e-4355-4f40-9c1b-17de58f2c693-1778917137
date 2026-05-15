@@ -168,10 +168,10 @@ export default function CasesPage() {
                                   <Badge variant="outline" className="capitalize">
                                     {party.role}
                                   </Badge>
-                                  {party.verification && (
-                                    <Badge variant={getStatusVariant(party.verification.status)} className={party.verification.status === "verified" ? "bg-accent" : ""}>
-                                      {getStatusIcon(party.verification.status)}
-                                      <span className="ml-1 capitalize">{party.verification.status}</span>
+                                  {party.verification_status && (
+                                    <Badge variant={getStatusVariant(party.verification_status)} className={party.verification_status === "verified" ? "bg-accent" : ""}>
+                                      {getStatusIcon(party.verification_status)}
+                                      <span className="ml-1 capitalize">{party.verification_status}</span>
                                     </Badge>
                                   )}
                                 </div>

@@ -63,16 +63,8 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
               <p className="font-mono text-sm tabular-nums">{property.cadastral_reference}</p>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">{t("property.profile.propertyType")}</p>
-              <p className="text-sm">{property.property_type || t("property.types.apartment")}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">{t("property.profile.municipality")}</p>
-              <p className="text-sm">{property.municipality || "—"}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">{t("property.profile.province")}</p>
-              <p className="text-sm">{property.province || "—"}</p>
+              <p className="text-sm text-muted-foreground">{t("property.profile.region" as any)}</p>
+              <p className="text-sm">{property.region || "—"}</p>
             </div>
           </div>
 
