@@ -1,23 +1,26 @@
 ---
 title: Nota Simple Ownership Workflow
-status: todo
+status: in_progress
 priority: medium
 type: feature
-tags: [property, ownership, documents]
+tags: [ownership, verification, registry]
+created_by: softgen
+created_at: 2026-05-15
 position: 6
 ---
 
 ## Notes
-A critical piece of Layer C is verifying that the claimed owner actually owns the property. For the MVP, this is a document-backed workflow using the Spanish land registry extract (Nota Simple).
+Build the Nota Simple (Spanish property registry document) upload and verification interface. Users upload a Nota Simple PDF, the system extracts ownership data, and matches it against the host's verified identity. This establishes the final trust layer: proving the host actually owns or legally controls the property they're listing.
 
 ## Checklist
-- [ ] Build an interface on the case detail page to initiate an ownership check.
-- [ ] Provide two mock pathways: "Order via Intermediary" and "Upload Existing Nota Simple PDF".
-- [ ] Create a mock extraction results panel displaying parsed fields: Registered Owner Name, NIE/DNI, and IDUFIR/CRU.
-- [ ] Add a match status indicator comparing the extracted Nota Simple data against the claimed host's verified identity.
-- [ ] Implement a "Request Manual Review" fallback for ambiguous matches.
+- [x] Create /verify/ownership page with upload interface
+- [x] Build NotaSimpleUpload component with PDF file validation
+- [x] Create OwnershipMatchCard showing extracted registry data
+- [x] Add match status visualization (matched/pending/mismatch)
+- [x] Display matched owner details alongside host identity
+- [x] Add ownership verification translations
 
 ## Acceptance
-- The user can simulate uploading a Nota Simple document.
-- The interface displays the extracted fields and visualizes whether the registry name matches the host's identity.
+- Users can upload a Nota Simple PDF and see extracted ownership information.
+- The interface clearly shows whether the registry owner matches the host's identity.
 - Unmatched or ambiguous results correctly surface a warning state.

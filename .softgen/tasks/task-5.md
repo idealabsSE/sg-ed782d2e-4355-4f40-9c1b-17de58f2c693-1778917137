@@ -1,6 +1,6 @@
 ---
 title: B2B Multi-Party Case Management
-status: in_progress
+status: done
 priority: high
 type: feature
 tags: [cases, b2b, multi-party]

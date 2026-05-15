@@ -109,7 +109,28 @@ export type TranslationKey =
   | "cases.create"
   | "cases.created"
   | "cases.parties"
-  | "cases.viewDetails";
+  | "cases.viewDetails"
+  | "ownership.page.title"
+  | "ownership.page.description"
+  | "ownership.page.heading"
+  | "ownership.page.subheading"
+  | "ownership.upload.title"
+  | "ownership.upload.description"
+  | "ownership.upload.label"
+  | "ownership.upload.prompt"
+  | "ownership.upload.help"
+  | "ownership.registry.title"
+  | "ownership.registry.description"
+  | "ownership.registry.ref"
+  | "ownership.registry.date"
+  | "ownership.match.title"
+  | "ownership.match.description"
+  | "ownership.match.registryOwner"
+  | "ownership.match.verifiedHost"
+  | "ownership.match.success"
+  | "ownership.match.successDesc"
+  | "ownership.match.failed"
+  | "ownership.match.failedDesc";
 
 const translations: Record<Locale, Record<TranslationKey, string>> = {
   en: {
@@ -215,6 +236,27 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "cases.created": "Created",
     "cases.parties": "Parties",
     "cases.viewDetails": "View Details",
+    "ownership.page.title": "Ownership Verification - TrustPlatform",
+    "ownership.page.description": "Verify property ownership through Spanish registry documents",
+    "ownership.page.heading": "Ownership Verification",
+    "ownership.page.subheading": "Upload a Nota Simple to verify the host's ownership of the property",
+    "ownership.upload.title": "Upload Nota Simple",
+    "ownership.upload.description": "Upload the property registry document to begin ownership verification",
+    "ownership.upload.label": "Nota Simple Document",
+    "ownership.upload.prompt": "Click to upload or drag PDF here",
+    "ownership.upload.help": "Upload a Nota Simple PDF from the Spanish Property Registry",
+    "ownership.registry.title": "Registry Information",
+    "ownership.registry.description": "Extracted data from the uploaded Nota Simple document",
+    "ownership.registry.ref": "Registry Reference",
+    "ownership.registry.date": "Registration Date",
+    "ownership.match.title": "Ownership Match",
+    "ownership.match.description": "Comparing registry owner with verified host identity",
+    "ownership.match.registryOwner": "Registry Owner",
+    "ownership.match.verifiedHost": "Verified Host",
+    "ownership.match.success": "Ownership Confirmed",
+    "ownership.match.successDesc": "The registry owner matches the verified host identity",
+    "ownership.match.failed": "Ownership Mismatch",
+    "ownership.match.failedDesc": "The registry owner does not match the verified host identity",
   },
   sv: {
     "nav.home": "Hem",
@@ -319,6 +361,27 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "cases.created": "Skapad",
     "cases.parties": "Parter",
     "cases.viewDetails": "Visa Detaljer",
+    "ownership.page.title": "Ägarverifiering - TrustPlatform",
+    "ownership.page.description": "Verifiera fastighetsägande genom spanska registerdokument",
+    "ownership.page.heading": "Ägarverifiering",
+    "ownership.page.subheading": "Ladda upp en Nota Simple för att verifiera värdens ägande av fastigheten",
+    "ownership.upload.title": "Ladda Upp Nota Simple",
+    "ownership.upload.description": "Ladda upp fastighetsregisterdokumentet för att påbörja ägarverifiering",
+    "ownership.upload.label": "Nota Simple Dokument",
+    "ownership.upload.prompt": "Klicka för att ladda upp eller dra PDF hit",
+    "ownership.upload.help": "Ladda upp en Nota Simple PDF från det spanska fastighetsregistret",
+    "ownership.registry.title": "Registerinformation",
+    "ownership.registry.description": "Extraherad data från det uppladdade Nota Simple-dokumentet",
+    "ownership.registry.ref": "Registerreferens",
+    "ownership.registry.date": "Registreringsdatum",
+    "ownership.match.title": "Ägarmatchning",
+    "ownership.match.description": "Jämför registerägare med verifierad värdidentitet",
+    "ownership.match.registryOwner": "Registerägare",
+    "ownership.match.verifiedHost": "Verifierad Värd",
+    "ownership.match.success": "Ägande Bekräftat",
+    "ownership.match.successDesc": "Registerägaren matchar den verifierade värdidentiteten",
+    "ownership.match.failed": "Ägarmatchning Misslyckades",
+    "ownership.match.failedDesc": "Registerägaren matchar inte den verifierade värdidentiteten",
   },
   es: {
     "nav.home": "Inicio",
@@ -423,6 +486,27 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "cases.created": "Creado",
     "cases.parties": "Partes",
     "cases.viewDetails": "Ver Detalles",
+    "ownership.page.title": "Verificación de Propiedad - TrustPlatform",
+    "ownership.page.description": "Verifica la propiedad mediante documentos del registro español",
+    "ownership.page.heading": "Verificación de Propiedad",
+    "ownership.page.subheading": "Sube una Nota Simple para verificar la propiedad del anfitrión",
+    "ownership.upload.title": "Subir Nota Simple",
+    "ownership.upload.description": "Sube el documento del registro de propiedad para comenzar la verificación de propiedad",
+    "ownership.upload.label": "Documento Nota Simple",
+    "ownership.upload.prompt": "Haz clic para subir o arrastra PDF aquí",
+    "ownership.upload.help": "Sube un PDF de Nota Simple del Registro de la Propiedad español",
+    "ownership.registry.title": "Información del Registro",
+    "ownership.registry.description": "Datos extraídos del documento Nota Simple subido",
+    "ownership.registry.ref": "Referencia de Registro",
+    "ownership.registry.date": "Fecha de Registro",
+    "ownership.match.title": "Coincidencia de Propiedad",
+    "ownership.match.description": "Comparando propietario del registro con identidad del anfitrión verificado",
+    "ownership.match.registryOwner": "Propietario del Registro",
+    "ownership.match.verifiedHost": "Anfitrión Verificado",
+    "ownership.match.success": "Propiedad Confirmada",
+    "ownership.match.successDesc": "El propietario del registro coincide con la identidad del anfitrión verificado",
+    "ownership.match.failed": "Desajuste de Propiedad",
+    "ownership.match.failedDesc": "El propietario del registro no coincide con la identidad del anfitrión verificado",
   },
 };
 
