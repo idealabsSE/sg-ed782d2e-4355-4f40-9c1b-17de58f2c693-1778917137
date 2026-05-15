@@ -1,6 +1,6 @@
 ---
 title: GDPR Compliance Module
-status: in_progress
+status: done
 priority: high
 type: feature
 tags:
@@ -21,7 +21,7 @@ Implement GDPR compliance infrastructure per PRD Section 14. This is mandatory b
 - [x] Build DSAR (Data Subject Request) intake workflow
 - [x] Implement DSAR processing: access, erasure, portability handlers
 - [x] Create retention policy configuration per data category
-- [ ] Build automated retention sweep Edge Functions
+- [x] Build automated retention sweep Edge Functions
 - [x] Add `vendor_registry` for third-party processor tracking
 - [x] Create consent management interface
 - [x] Document legal basis for each processing activity
