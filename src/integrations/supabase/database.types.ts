@@ -15,6 +15,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      access_audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          ip_address: string | null
+          metadata: Json | null
+          resource_id: string
+          resource_type: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          resource_id: string
+          resource_type: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          resource_id?: string
+          resource_type?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_audit_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       case_parties: {
         Row: {
           case_id: string
@@ -317,6 +361,145 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      security_incidents: {
+        Row: {
+          affected_user_id: string | null
+          created_at: string
+          description: string
+          detected_by: string | null
+          id: string
+          incident_type: string
+          metadata: Json | null
+          resolution_notes: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          severity: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          affected_user_id?: string | null
+          created_at?: string
+          description: string
+          detected_by?: string | null
+          id?: string
+          incident_type: string
+          metadata?: Json | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          affected_user_id?: string | null
+          created_at?: string
+          description?: string
+          detected_by?: string | null
+          id?: string
+          incident_type?: string
+          metadata?: Json | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "security_incidents_affected_user_id_fkey"
+            columns: ["affected_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "security_incidents_detected_by_fkey"
+            columns: ["detected_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "security_incidents_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      security_review_records: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          audit_log_entries_reviewed: number | null
+          created_at: string
+          findings: string
+          id: string
+          incidents_reviewed: number | null
+          recommendations: string | null
+          review_period_end: string
+          review_period_start: string
+          review_type: string
+          reviewer_id: string
+          status: string
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          audit_log_entries_reviewed?: number | null
+          created_at?: string
+          findings: string
+          id?: string
+          incidents_reviewed?: number | null
+          recommendations?: string | null
+          review_period_end: string
+          review_period_start: string
+          review_type: string
+          reviewer_id: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          audit_log_entries_reviewed?: number | null
+          created_at?: string
+          findings?: string
+          id?: string
+          incidents_reviewed?: number | null
+          recommendations?: string | null
+          review_period_end?: string
+          review_period_start?: string
+          review_type?: string
+          reviewer_id?: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "security_review_records_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "security_review_records_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       source_snapshots: {
         Row: {
