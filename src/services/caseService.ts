@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { auditService } from "@/services/auditService";
 
 type Case = Database["public"]["Tables"]["cases"]["Row"];
 type CaseInsert = Database["public"]["Tables"]["cases"]["Insert"];
@@ -86,6 +87,16 @@ export const caseService = {
 
       if (error) {
         return { data: null, error: new Error(error.message) };
+      }
+
+      // Log case access
+      if (data) {
+        await auditService.logAccess({
+          action: "view",
+          resourceType: "case",
+          resourceId: caseId,
+          metadata: { status: data.status, propertyId: data.property_id }
+        });
       }
 
       return { data: data as CaseWithDetails, error: null };
@@ -187,6 +198,14 @@ export const caseService = {
       if (error) {
         return { data: null, error: new Error(error.message) };
       }
+
+      // Log case status update
+      await auditService.logAccess({
+        action: "edit",
+        resourceType: "case",
+        resourceId: caseId,
+        metadata: { newStatus: status, action: "status_update" }
+      });
 
       return { data, error: null };
     } catch (err) {

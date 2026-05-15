@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { auditService } from "@/services/auditService";
 
 type Verification = Database["public"]["Tables"]["verifications"]["Row"];
 type VerificationInsert = Database["public"]["Tables"]["verifications"]["Insert"];
@@ -102,6 +103,16 @@ export const verificationService = {
         return { data: null, error: new Error(error.message) };
       }
 
+      // Log verification access
+      if (data) {
+        await auditService.logAccess({
+          action: "view",
+          resourceType: "verification",
+          resourceId: id,
+          metadata: { verificationType: data.verification_type, status: data.status }
+        });
+      }
+
       return { data, error: null };
     } catch (err) {
       console.error("verificationService.getVerificationById error:", err);
@@ -141,6 +152,18 @@ export const verificationService = {
       if (error) {
         return { data: null, error: new Error(error.message) };
       }
+
+      // Log verification status update (critical reviewer action)
+      await auditService.logAccess({
+        action: "edit",
+        resourceType: "verification",
+        resourceId: verificationId,
+        metadata: { 
+          newStatus: status, 
+          hasReviewNotes: !!reviewNotes,
+          action: "status_update"
+        }
+      });
 
       return { data, error: null };
     } catch (err) {

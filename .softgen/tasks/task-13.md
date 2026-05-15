@@ -1,6 +1,6 @@
 ---
 title: Access Audit Logging & Security Module
-status: in_progress
+status: done
 priority: high
 type: feature
 tags:
@@ -23,12 +23,12 @@ Implement security audit infrastructure per PRD Section 13 (Security Requirement
 - [x] Create `security_incidents` table and reporting workflow
 - [x] Add `security_review_records` for periodic audits
 - [x] Build admin audit log viewer with filtering
-- [ ] Implement anomaly detection alerts (unusual access patterns)
-- [ ] Document auditability requirements for reviewers
+- [x] Implement anomaly detection alerts (unusual access patterns)
+- [x] Document auditability requirements for reviewers
 
 ## Acceptance
-- All document access logged with user, timestamp, action
-- Reviewer actions on cases fully auditable
-- Security incidents can be reported and tracked
-- Admins can query audit logs with date/user/action filters
-- Anomaly alerts trigger for suspicious patterns
+- All document access logged with user, timestamp, action ✓
+- Reviewer actions on cases fully auditable ✓
+- Security incidents can be reported and tracked ✓
+- Admins can query audit logs with date/user/action filters ✓
+- Anomaly alerts trigger for suspicious patterns ✓
