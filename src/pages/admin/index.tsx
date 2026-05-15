@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -146,7 +147,7 @@ export default function AdminPage() {
 
   if (isLoading) {
     return (
-      <>
+      <ProtectedRoute>
         <SEO
           title={t("admin.page.title")}
           description={t("admin.page.description")}
@@ -157,12 +158,12 @@ export default function AdminPage() {
             <p className="text-sm text-muted-foreground">{t("common.loading")}</p>
           </div>
         </div>
-      </>
+      </ProtectedRoute>
     );
   }
 
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title={t("admin.page.title")}
         description={t("admin.page.description")}
@@ -336,6 +337,6 @@ export default function AdminPage() {
           )}
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

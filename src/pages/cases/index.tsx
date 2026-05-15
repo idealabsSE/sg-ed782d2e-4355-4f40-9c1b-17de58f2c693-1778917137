@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -69,7 +70,7 @@ export default function CasesPage() {
 
   if (isLoading) {
     return (
-      <>
+      <ProtectedRoute>
         <SEO
           title={t("cases.page.title")}
           description={t("cases.page.description")}
@@ -80,12 +81,12 @@ export default function CasesPage() {
             <p className="text-sm text-muted-foreground">{t("common.loading")}</p>
           </div>
         </div>
-      </>
+      </ProtectedRoute>
     );
   }
 
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title={t("cases.page.title")}
         description={t("cases.page.description")}
@@ -202,6 +203,6 @@ export default function CasesPage() {
           )}
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

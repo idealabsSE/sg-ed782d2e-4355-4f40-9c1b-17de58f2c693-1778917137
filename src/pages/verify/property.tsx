@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { PropertySearchForm } from "@/components/PropertySearchForm";
 import { PropertyProfile } from "@/components/PropertyProfile";
 import { PropertyNotFound } from "@/components/PropertyNotFound";
@@ -40,7 +41,7 @@ export default function PropertyVerification() {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title={t("property.page.title")}
         description={t("property.page.description")}
@@ -74,6 +75,6 @@ export default function PropertyVerification() {
           )}
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }
