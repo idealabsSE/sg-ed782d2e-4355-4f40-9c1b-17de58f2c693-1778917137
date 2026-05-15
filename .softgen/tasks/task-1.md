@@ -1,6 +1,6 @@
 ---
 title: Global Layout and Localization Setup
-status: in_progress
+status: done
 priority: urgent
 type: feature
 tags: [layout, i18n, design-system]
@@ -21,7 +21,7 @@ Establish the core application shell with multi-language support (English, Swedi
 - [x] Build Navigation component with locale switcher
 - [x] Create main layout wrapper in _app.tsx
 - [x] Build landing page (index.tsx) with hero and feature cards
-- [ ] Add footer with legal links and language selector
+- [x] Add footer with legal links and language selector
 
 ## Acceptance
 - User can switch between English, Swedish, and Spanish via the navigation dropdown.

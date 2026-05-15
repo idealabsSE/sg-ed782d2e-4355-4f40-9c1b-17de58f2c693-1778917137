@@ -1,23 +1,27 @@
 ---
 title: Property Lookup Interface
-status: todo
+status: in_progress
 priority: high
 type: feature
-tags: [property, search, compliance]
+tags: [property, verification, compliance]
+created_by: softgen
+created_at: 2026-05-15
 position: 2
 ---
 
 ## Notes
-Build the public-facing property verification interface. Users should be able to look up a Spanish property and view its compliance profile based on regional tourist license data (modeled on the GVA open-data concept).
+Build the property lookup and compliance profiling interface, allowing users to search by address or cadastral reference. Display property metadata, compliance requirements (tourist licenses), and basic verification status. This establishes trust at the property level before moving to identity verification.
 
 ## Checklist
-- [ ] Build a search hero section accepting inputs like address, cadastral reference, CRU, or regional license number.
-- [ ] Design a property compliance profile view showing the registration status, ingestion timestamp, and official data source name.
-- [ ] Include a section for secondary spot-checks (SForms fallback notice).
-- [ ] Present property capacity, exact registered address, and registration date in a clear, tabular format.
-- [ ] Display empty states and clear error messaging for unverified or missing properties.
+- [ ] Create /verify/property page with search form (address + cadastral reference inputs)
+- [ ] Build PropertySearchForm component with validation
+- [ ] Create PropertyProfile component to display results (address, cadastral ref, license status)
+- [ ] Add ComplianceCard showing regional license requirements
+- [ ] Implement "Not Found" state with clear guidance
+- [ ] Add data-value styling (tabular-nums) for IDs and references
 
 ## Acceptance
-- User can search for a mock property and see a structured compliance profile.
-- All numeric identifiers use monospace, tabular numbers for high legibility.
+- User can search by address or cadastral reference and see structured property data.
+- License compliance status is clearly displayed with color-coded badges.
+- The interface uses sharp borders, generous whitespace, tabular numbers for high legibility.
 - The interface handles "Not Found" properties gracefully.
