@@ -16,7 +16,7 @@ import type {
 
 export class VerifikProvider implements IdentityVerificationProvider {
   readonly name = "Verifik";
-  readonly supportedCountries = ["ES"] as const;
+  readonly supportedCountries: Array<"SE" | "ES"> = ["ES"];
   readonly supportedDocumentTypes: DocumentType[] = [
     "spanish_dni",
     "spanish_nie",

@@ -16,7 +16,7 @@ import type {
 
 export class TicAuthwayProvider implements IdentityVerificationProvider {
   readonly name = "TIC/Authway";
-  readonly supportedCountries = ["SE"] as const;
+  readonly supportedCountries: Array<"SE" | "ES"> = ["SE"];
   readonly supportedDocumentTypes: DocumentType[] = [
     "swedish_passport",
     "swedish_national_id",

@@ -1,6 +1,6 @@
 ---
 title: Provider Abstraction Layer (Identity Verification)
-status: in_progress
+status: done
 priority: medium
 type: feature
 tags:
