@@ -16,6 +16,7 @@ A cross-border rental verification SaaS for Spain, bridging Swedish and Spanish 
 - **Style**: Sharp borders, minimal elevation, generous whitespace. Restrained functional colors. Data screens use `tabular-nums` for identifiers.
 
 ## Features
+- Supabase persistence for all domain entities (Users, Properties, Cases, Verifications).
 - Property lookup and compliance profiling (regional licenses).
 - Multi-lingual interface from day one (English, Swedish, Spanish).
 - Swedish and Spanish identity/document verification workflows.
