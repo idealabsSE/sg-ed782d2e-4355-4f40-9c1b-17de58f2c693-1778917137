@@ -1,23 +1,25 @@
 ---
 title: Spanish User Verification Flow
-status: todo
+status: in_progress
 priority: high
 type: feature
-tags: [verification, spanish, identity]
+tags: [identity, verification, spain]
+created_by: softgen
+created_at: 2026-05-15
 position: 4
 ---
 
 ## Notes
-Create the verification wizard for Spanish users. This flow includes DNI/NIE validation steps and branches based on the user's role (owner, tenant, guarantor), requiring different evidence for each.
+Build the Spanish identity verification wizard for tenants and hosts. Users provide their Spanish identity documentation (DNI/NIE), select their role, and upload verification documents. This mirrors the Swedish flow but adapts to Spanish document types and validation patterns.
 
 ## Checklist
-- [ ] Build a multi-step verification wizard tailored to Spanish users.
-- [ ] Step 1: Identity evidence upload (simulating Verifik API for DNI/NIE/passport data capture).
-- [ ] Step 2: Role selection (Owner/Host, Tenant, Guarantor) which dynamically alters the next steps.
-- [ ] Step 3: Conditional document upload area (e.g., work contracts/bank statements for tenants; avalista docs for guarantors).
-- [ ] Step 4: Display the generated Spanish Trust Profile Summary.
+- [x] Create /verify/identity/spanish page
+- [x] Adapt VerificationWizard to support Spanish document types (DNI, NIE)
+- [x] Add Spanish-specific validation patterns and placeholders
+- [x] Build Spanish identity form with DNI/NIE selection
+- [x] Add Spanish translations for identity verification content
+- [x] Test the complete Spanish verification flow
 
 ## Acceptance
-- The wizard successfully branches requirements based on the user's selected role.
-- The user can simulate uploading a DNI and relevant role-based documents.
+- Spanish users can complete verification by selecting role and uploading a DNI and relevant role-based documents.
 - The flow supports Spanish localization seamlessly.

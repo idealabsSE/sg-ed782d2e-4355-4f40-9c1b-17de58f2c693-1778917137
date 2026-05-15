@@ -1,6 +1,6 @@
 ---
 title: Swedish Tenant & Host Verification Flow
-status: in_progress
+status: done
 priority: high
 type: feature
 tags: [identity, verification, sweden]

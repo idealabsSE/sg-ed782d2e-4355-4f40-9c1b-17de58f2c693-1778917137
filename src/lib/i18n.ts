@@ -63,6 +63,10 @@ export type TranslationKey =
   | "identity.swedish.description"
   | "identity.swedish.heading"
   | "identity.swedish.subheading"
+  | "identity.spanish.title"
+  | "identity.spanish.description"
+  | "identity.spanish.heading"
+  | "identity.spanish.subheading"
   | "identity.wizard.step"
   | "identity.wizard.continue"
   | "identity.wizard.back"
@@ -79,6 +83,8 @@ export type TranslationKey =
   | "identity.documents.personnummer"
   | "identity.documents.idCard"
   | "identity.documents.passport"
+  | "identity.documents.dni"
+  | "identity.documents.nie"
   | "identity.documents.idNumber"
   | "identity.documents.idHelp"
   | "identity.documents.upload"
@@ -154,6 +160,10 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.swedish.description": "Verify your Swedish identity for cross-border rental transactions",
     "identity.swedish.heading": "Swedish Identity Verification",
     "identity.swedish.subheading": "Complete your identity verification to establish trust with hosts and tenants",
+    "identity.spanish.title": "Spanish Identity Verification - TrustPlatform",
+    "identity.spanish.description": "Verify your Spanish identity for cross-border rental transactions",
+    "identity.spanish.heading": "Spanish Identity Verification",
+    "identity.spanish.subheading": "Complete your identity verification to establish trust with hosts and tenants",
     "identity.wizard.step": "Step",
     "identity.wizard.continue": "Continue",
     "identity.wizard.back": "Back",
@@ -170,6 +180,8 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.documents.personnummer": "Personnummer (Swedish ID Number)",
     "identity.documents.idCard": "Swedish ID Card",
     "identity.documents.passport": "Swedish Passport",
+    "identity.documents.dni": "DNI (Spanish National ID)",
+    "identity.documents.nie": "NIE (Foreigner ID Number)",
     "identity.documents.idNumber": "ID Number",
     "identity.documents.idHelp": "Enter your identification number exactly as shown on your document",
     "identity.documents.upload": "Upload Documents",
@@ -244,6 +256,10 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.swedish.description": "Verifiera din svenska identitet för gränsöverskridande hyrestransaktioner",
     "identity.swedish.heading": "Svensk Identitetsverifiering",
     "identity.swedish.subheading": "Slutför din identitetsverifiering för att etablera förtroende med värdar och hyresgäster",
+    "identity.spanish.title": "Spansk Identitetsverifiering - TrustPlatform",
+    "identity.spanish.description": "Verifiera din spanska identitet för gränsöverskridande hyrestransaktioner",
+    "identity.spanish.heading": "Spansk Identitetsverifiering",
+    "identity.spanish.subheading": "Slutför din identitetsverifiering för att etablera förtroende med värdar och hyresgäster",
     "identity.wizard.step": "Steg",
     "identity.wizard.continue": "Fortsätt",
     "identity.wizard.back": "Tillbaka",
@@ -260,6 +276,8 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.documents.personnummer": "Personnummer",
     "identity.documents.idCard": "Svenskt ID-kort",
     "identity.documents.passport": "Svenskt Pass",
+    "identity.documents.dni": "DNI (Spanskt National-ID)",
+    "identity.documents.nie": "NIE (Utlännings-ID-nummer)",
     "identity.documents.idNumber": "ID-nummer",
     "identity.documents.idHelp": "Ange ditt identifikationsnummer exakt som det visas på ditt dokument",
     "identity.documents.upload": "Ladda Upp Dokument",
@@ -334,6 +352,10 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.swedish.description": "Verifica tu identidad sueca para transacciones de alquiler transfronterizas",
     "identity.swedish.heading": "Verificación de Identidad Sueca",
     "identity.swedish.subheading": "Completa tu verificación de identidad para establecer confianza con anfitriones e inquilinos",
+    "identity.spanish.title": "Verificación de Identidad Española - TrustPlatform",
+    "identity.spanish.description": "Verifica tu identidad española para transacciones de alquiler transfronterizas",
+    "identity.spanish.heading": "Verificación de Identidad Española",
+    "identity.spanish.subheading": "Completa tu verificación de identidad para establecer confianza con anfitriones e inquilinos",
     "identity.wizard.step": "Paso",
     "identity.wizard.continue": "Continuar",
     "identity.wizard.back": "Atrás",
@@ -350,6 +372,8 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.documents.personnummer": "Personnummer (Número ID Sueco)",
     "identity.documents.idCard": "Tarjeta de Identidad Sueca",
     "identity.documents.passport": "Pasaporte Sueco",
+    "identity.documents.dni": "DNI (Documento Nacional de Identidad)",
+    "identity.documents.nie": "NIE (Número de Identidad de Extranjero)",
     "identity.documents.idNumber": "Número de Identificación",
     "identity.documents.idHelp": "Introduce tu número de identificación exactamente como aparece en tu documento",
     "identity.documents.upload": "Subir Documentos",

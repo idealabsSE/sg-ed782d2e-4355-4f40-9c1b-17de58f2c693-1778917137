@@ -12,7 +12,9 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 type VerificationStep = "role" | "documents" | "review";
 type UserRole = "tenant" | "host" | "";
-type DocumentType = "personnummer" | "passport" | "id-card" | "";
+type SwedishDocumentType = "personnummer" | "passport" | "id-card" | "";
+type SpanishDocumentType = "dni" | "nie" | "";
+type DocumentType = SwedishDocumentType | SpanishDocumentType;
 
 interface VerificationData {
   role: UserRole;
@@ -21,7 +23,11 @@ interface VerificationData {
   uploadedFiles: File[];
 }
 
-export function VerificationWizard() {
+interface VerificationWizardProps {
+  variant?: "swedish" | "spanish";
+}
+
+export function VerificationWizard({ variant = "swedish" }: VerificationWizardProps) {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState<VerificationStep>("role");
   const [data, setData] = useState<VerificationData>({
@@ -69,6 +75,14 @@ export function VerificationWizard() {
       setCurrentStep("role");
     } else if (currentStep === "review") {
       setCurrentStep("documents");
+    }
+  };
+
+  const getPlaceholder = () => {
+    if (variant === "swedish") {
+      return data.documentType === "personnummer" ? "YYYYMMDD-XXXX" : "";
+    } else {
+      return data.documentType === "dni" ? "12345678X" : data.documentType === "nie" ? "X1234567X" : "";
     }
   };
 
@@ -141,9 +155,18 @@ export function VerificationWizard() {
                   <SelectValue placeholder={t("identity.documents.selectType")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="personnummer">{t("identity.documents.personnummer")}</SelectItem>
-                  <SelectItem value="id-card">{t("identity.documents.idCard")}</SelectItem>
-                  <SelectItem value="passport">{t("identity.documents.passport")}</SelectItem>
+                  {variant === "swedish" ? (
+                    <>
+                      <SelectItem value="personnummer">{t("identity.documents.personnummer")}</SelectItem>
+                      <SelectItem value="id-card">{t("identity.documents.idCard")}</SelectItem>
+                      <SelectItem value="passport">{t("identity.documents.passport")}</SelectItem>
+                    </>
+                  ) : (
+                    <>
+                      <SelectItem value="dni">{t("identity.documents.dni")}</SelectItem>
+                      <SelectItem value="nie">{t("identity.documents.nie")}</SelectItem>
+                    </>
+                  )}
                 </SelectContent>
               </Select>
             </div>
@@ -153,7 +176,7 @@ export function VerificationWizard() {
               <Input
                 id="idNumber"
                 type="text"
-                placeholder={data.documentType === "personnummer" ? "YYYYMMDD-XXXX" : ""}
+                placeholder={getPlaceholder()}
                 value={data.idNumber}
                 onChange={(e) => handleIdNumberChange(e.target.value)}
                 className="font-mono"
