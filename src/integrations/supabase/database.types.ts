@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -104,6 +104,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      connector_metadata: {
+        Row: {
+          config: Json | null
+          consecutive_failures: number
+          created_at: string
+          health_status: string
+          id: string
+          last_failure_at: string | null
+          last_success_at: string | null
+          source: string
+          total_records_ingested: number
+          total_runs: number
+          updated_at: string
+        }
+        Insert: {
+          config?: Json | null
+          consecutive_failures?: number
+          created_at?: string
+          health_status?: string
+          id?: string
+          last_failure_at?: string | null
+          last_success_at?: string | null
+          source: string
+          total_records_ingested?: number
+          total_runs?: number
+          updated_at?: string
+        }
+        Update: {
+          config?: Json | null
+          consecutive_failures?: number
+          created_at?: string
+          health_status?: string
+          id?: string
+          last_failure_at?: string | null
+          last_success_at?: string | null
+          source?: string
+          total_records_ingested?: number
+          total_runs?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       ownership_documents: {
         Row: {
@@ -213,6 +255,105 @@ export type Database = {
           license_status?: string | null
           region?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      regional_licenses: {
+        Row: {
+          address: string | null
+          beds: number | null
+          cadastral_reference: string | null
+          capacity: number | null
+          created_at: string
+          first_seen_at: string
+          id: string
+          last_verified_at: string
+          license_number: string
+          license_type: string | null
+          municipality: string | null
+          raw_data: Json | null
+          region: string
+          source: string
+          source_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          beds?: number | null
+          cadastral_reference?: string | null
+          capacity?: number | null
+          created_at?: string
+          first_seen_at?: string
+          id?: string
+          last_verified_at?: string
+          license_number: string
+          license_type?: string | null
+          municipality?: string | null
+          raw_data?: Json | null
+          region?: string
+          source?: string
+          source_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          beds?: number | null
+          cadastral_reference?: string | null
+          capacity?: number | null
+          created_at?: string
+          first_seen_at?: string
+          id?: string
+          last_verified_at?: string
+          license_number?: string
+          license_type?: string | null
+          municipality?: string | null
+          raw_data?: Json | null
+          region?: string
+          source?: string
+          source_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      source_snapshots: {
+        Row: {
+          created_at: string
+          errors: Json | null
+          id: string
+          records_fetched: number
+          records_new: number
+          records_removed: number
+          records_updated: number
+          run_at: string
+          snapshot_hash: string | null
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          errors?: Json | null
+          id?: string
+          records_fetched: number
+          records_new?: number
+          records_removed?: number
+          records_updated?: number
+          run_at?: string
+          snapshot_hash?: string | null
+          source: string
+        }
+        Update: {
+          created_at?: string
+          errors?: Json | null
+          id?: string
+          records_fetched?: number
+          records_new?: number
+          records_removed?: number
+          records_updated?: number
+          run_at?: string
+          snapshot_hash?: string | null
+          source?: string
         }
         Relationships: []
       }
