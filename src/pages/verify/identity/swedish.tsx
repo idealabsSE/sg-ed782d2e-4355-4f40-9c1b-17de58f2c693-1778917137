@@ -1,12 +1,13 @@
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { VerificationWizard } from "@/components/VerificationWizard";
 
 export default function SwedishVerification() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title={t("identity.swedish.title")}
         description={t("identity.swedish.description")}
@@ -23,6 +24,6 @@ export default function SwedishVerification() {
           <VerificationWizard />
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

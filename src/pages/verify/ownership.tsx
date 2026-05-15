@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -65,7 +66,7 @@ export default function OwnershipVerificationPage() {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title={t("ownership.page.title")}
         description={t("ownership.page.description")}
@@ -229,6 +230,6 @@ export default function OwnershipVerificationPage() {
           )}
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

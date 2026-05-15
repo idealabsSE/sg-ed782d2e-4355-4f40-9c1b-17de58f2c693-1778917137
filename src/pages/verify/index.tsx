@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function VerifyIndex() {
   const router = useRouter();
@@ -8,5 +9,9 @@ export default function VerifyIndex() {
     router.replace("/verify/property");
   }, [router]);
 
-  return null;
+  return (
+    <ProtectedRoute>
+      {null}
+    </ProtectedRoute>
+  );
 }

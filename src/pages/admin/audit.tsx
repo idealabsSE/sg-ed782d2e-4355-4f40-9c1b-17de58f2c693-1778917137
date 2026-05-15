@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,13 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertCircle, Shield, FileText, Search, Download } from "lucide-react";
 import { auditService } from "@/services/auditService";
-import { useRouter } from "next/router";
-import { supabase } from "@/integrations/supabase/client";
 
 export default function AuditPage() {
-  const router = useRouter();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [auditLogs, setAuditLogs] = useState<any[]>([]);
   const [incidents, setIncidents] = useState<any[]>([]);
   
@@ -29,37 +23,8 @@ export default function AuditPage() {
   const [endDate, setEndDate] = useState<string>("");
 
   useEffect(() => {
-    checkAdminAccess();
+    loadData();
   }, []);
-
-  const checkAdminAccess = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push("/");
-        return;
-      }
-
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("email")
-        .eq("id", session.user.id)
-        .single();
-
-      if (!profile?.email?.endsWith("@xtrust.com")) {
-        router.push("/");
-        return;
-      }
-
-      setIsAdmin(true);
-      await loadData();
-    } catch (error) {
-      console.error("Admin access check failed:", error);
-      router.push("/");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const loadData = async () => {
     await Promise.all([loadAuditLogs(), loadIncidents()]);
@@ -108,35 +73,22 @@ export default function AuditPage() {
     a.click();
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!isAdmin) {
-    return null;
-  }
-
   return (
-    <>
+    <ProtectedRoute>
       <SEO
         title="Audit Logs - X Trust Admin"
         description="Security audit logs and incident management"
       />
-      <div className="min-h-screen flex flex-col bg-background">
-        <Navigation />
-        <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Shield className="h-8 w-8 text-primary" />
-              <h1 className="text-3xl font-semibold text-foreground">Security & Audit</h1>
+      <div className="container py-12">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="flex items-center gap-3">
+            <Shield className="h-8 w-8 text-primary" />
+            <div>
+              <h1 className="text-3xl font-bold">Security & Audit</h1>
+              <p className="text-muted-foreground mt-1">
+                Monitor access logs, security incidents, and compliance reviews
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Monitor access logs, security incidents, and compliance reviews
-            </p>
           </div>
 
           <Tabs defaultValue="logs" className="space-y-6">
@@ -358,9 +310,8 @@ export default function AuditPage() {
               </Card>
             </TabsContent>
           </Tabs>
-        </main>
-        <Footer />
+        </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }
