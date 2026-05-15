@@ -1,6 +1,6 @@
 ---
 title: Property Lookup Interface
-status: in_progress
+status: done
 priority: high
 type: feature
 tags: [property, verification, compliance]
@@ -13,12 +13,12 @@ position: 2
 Build the property lookup and compliance profiling interface, allowing users to search by address or cadastral reference. Display property metadata, compliance requirements (tourist licenses), and basic verification status. This establishes trust at the property level before moving to identity verification.
 
 ## Checklist
-- [ ] Create /verify/property page with search form (address + cadastral reference inputs)
-- [ ] Build PropertySearchForm component with validation
-- [ ] Create PropertyProfile component to display results (address, cadastral ref, license status)
-- [ ] Add ComplianceCard showing regional license requirements
-- [ ] Implement "Not Found" state with clear guidance
-- [ ] Add data-value styling (tabular-nums) for IDs and references
+- [x] Create /verify/property page with search form (address + cadastral reference inputs)
+- [x] Build PropertySearchForm component with validation
+- [x] Create PropertyProfile component to display results (address, cadastral ref, license status)
+- [x] Add ComplianceCard showing regional license requirements
+- [x] Implement "Not Found" state with clear guidance
+- [x] Add data-value styling (tabular-nums) for IDs and references
 
 ## Acceptance
 - User can search by address or cadastral reference and see structured property data.

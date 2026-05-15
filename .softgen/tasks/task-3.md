@@ -1,23 +1,26 @@
 ---
 title: Swedish Tenant & Host Verification Flow
-status: todo
+status: in_progress
 priority: high
 type: feature
-tags: [verification, swedish, identity]
+tags: [identity, verification, sweden]
+created_by: softgen
+created_at: 2026-05-15
 position: 3
 ---
 
 ## Notes
-Implement the wizard for Swedish users to verify their identity and solvency. This abstracts the BankID/Freja flow and handles document uploads for financial evidence (payslips, employment certificates). 
+Build the Swedish identity verification wizard for both tenants and hosts. Users select their role, provide their Swedish identity documentation (personnummer, ID card, or passport), and upload verification documents. The wizard should guide users through each step and present a final trust profile summary.
 
 ## Checklist
-- [ ] Build a multi-step verification wizard specifically for Swedish users.
-- [ ] Step 1: Mock interface for Swedish Identity Verification (simulating a TIC/Authway BankID flow).
-- [ ] Step 2: Document upload area for financial evidence with drag-and-drop support and clear file type constraints.
-- [ ] Step 3: A derived "Trust Profile Summary" screen showing the verified status without exposing the raw uploaded files.
-- [ ] Ensure all wizard steps have English, Swedish, and Spanish copy placeholders.
+- [ ] Create /verify/identity/swedish page with role selection (tenant/host)
+- [ ] Build multi-step wizard component (RoleSelect → DocumentUpload → Review)
+- [ ] Create form for Swedish personnummer and document type selection
+- [ ] Build document upload interface with file validation
+- [ ] Create final summary card showing trust signals and verification status
+- [ ] Add Swedish translations for all identity-related content
 
 ## Acceptance
-- A user can step through the mock identity check and arrive at the document upload screen.
-- Uploaded files simulate secure attachment to the user's profile.
-- The final step displays a clean, shareable summary of the user's trust signals.
+- Swedish users can complete the verification flow by selecting role, entering personnummer, and uploading ID documents.
+- Each step is clearly labeled with progress indicators.
+- The final summary displays a clean, shareable overview of the user's trust signals.
