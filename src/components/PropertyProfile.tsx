@@ -5,23 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import type { Database } from "@/integrations/supabase/types";
 
-interface PropertyData {
-  address: string;
-  cadastralRef: string;
-  municipality: string;
-  province: string;
-  licenseStatus: "verified" | "pending" | "none";
-  licenseNumber?: string;
-  propertyType: string;
-}
+type Property = Database["public"]["Tables"]["properties"]["Row"];
 
 interface PropertyProfileProps {
-  property: PropertyData;
+  property: Property;
 }
 
 export function PropertyProfile({ property }: PropertyProfileProps) {
   const { t } = useTranslation();
+
+  const licenseStatus = property.license_status || "none";
 
   const statusConfig = {
     verified: {
@@ -41,7 +36,7 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
     },
   };
 
-  const status = statusConfig[property.licenseStatus];
+  const status = statusConfig[licenseStatus as keyof typeof statusConfig] || statusConfig.none;
 
   return (
     <div className="space-y-6">
@@ -65,28 +60,28 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">{t("property.profile.cadastralRef")}</p>
-              <p className="font-mono text-sm data-value">{property.cadastralRef}</p>
+              <p className="font-mono text-sm tabular-nums">{property.cadastral_reference}</p>
             </div>
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">{t("property.profile.propertyType")}</p>
-              <p className="text-sm">{property.propertyType}</p>
+              <p className="text-sm">{property.property_type || t("property.types.apartment")}</p>
             </div>
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">{t("property.profile.municipality")}</p>
-              <p className="text-sm">{property.municipality}</p>
+              <p className="text-sm">{property.municipality || "—"}</p>
             </div>
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">{t("property.profile.province")}</p>
-              <p className="text-sm">{property.province}</p>
+              <p className="text-sm">{property.province || "—"}</p>
             </div>
           </div>
 
-          {property.licenseNumber && (
+          {property.license_number && (
             <>
               <Separator />
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">{t("property.profile.licenseNumber")}</p>
-                <p className="font-mono text-sm data-value">{property.licenseNumber}</p>
+                <p className="font-mono text-sm tabular-nums">{property.license_number}</p>
               </div>
             </>
           )}

@@ -4,32 +4,39 @@ import { SEO } from "@/components/SEO";
 import { PropertySearchForm } from "@/components/PropertySearchForm";
 import { PropertyProfile } from "@/components/PropertyProfile";
 import { PropertyNotFound } from "@/components/PropertyNotFound";
+import { propertyService } from "@/services/propertyService";
+import { Loader2 } from "lucide-react";
+import type { Database } from "@/integrations/supabase/types";
+
+type Property = Database["public"]["Tables"]["properties"]["Row"];
 
 export default function PropertyVerification() {
   const { t } = useTranslation();
-  const [searchResult, setSearchResult] = useState<"idle" | "found" | "not-found">("idle");
+  const [searchResult, setSearchResult] = useState<"idle" | "loading" | "found" | "not-found">("idle");
+  const [property, setProperty] = useState<Property | null>(null);
 
-  const handleSearch = (searchData: { address?: string; cadastralRef?: string }) => {
-    // Mock search logic - in production, this would call an API
-    const mockSuccess = searchData.address?.toLowerCase().includes("valencia") || 
-                        searchData.cadastralRef?.length === 20;
+  const handleSearch = async (searchData: { address?: string; cadastralRef?: string }) => {
+    setSearchResult("loading");
     
-    setSearchResult(mockSuccess ? "found" : "not-found");
+    const { data, error } = await propertyService.searchProperty({
+      cadastralReference: searchData.cadastralRef,
+      address: searchData.address,
+    });
+
+    console.log("Property search result:", { data, error });
+
+    if (error || !data) {
+      setSearchResult("not-found");
+      setProperty(null);
+    } else {
+      setSearchResult("found");
+      setProperty(data);
+    }
   };
 
   const handleReset = () => {
     setSearchResult("idle");
-  };
-
-  // Mock property data for demonstration
-  const mockProperty = {
-    address: "Carrer de Colón 23, 46004 Valencia",
-    cadastralRef: "4609511YJ2740N0001KL",
-    municipality: "Valencia",
-    province: "Valencia",
-    licenseStatus: "verified" as const,
-    licenseNumber: "VLC-AT-2024-0123",
-    propertyType: t("property.types.apartment"),
+    setProperty(null);
   };
 
   return (
@@ -51,8 +58,15 @@ export default function PropertyVerification() {
             <PropertySearchForm onSearch={handleSearch} />
           )}
 
-          {searchResult === "found" && (
-            <PropertyProfile property={mockProperty} />
+          {searchResult === "loading" && (
+            <div className="flex flex-col items-center justify-center py-12 space-y-4">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <p className="text-sm text-muted-foreground">{t("common.loading")}</p>
+            </div>
+          )}
+
+          {searchResult === "found" && property && (
+            <PropertyProfile property={property} />
           )}
 
           {searchResult === "not-found" && (
