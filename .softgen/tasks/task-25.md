@@ -1,22 +1,25 @@
 ---
 title: Route Protection and Navigation Update
-status: todo
+status: done
 priority: high
 type: feature
-tags: [auth, routing, navigation]
+tags: [auth, routing, frontend]
+created_by: agent
+created_at: 2026-05-15T18:27:01Z
 position: 25
 ---
 
 ## Notes
-Features should only be accessible to logged-in users. The public landing page can remain accessible, but all functional areas need to be guarded. The top navigation should also reflect the user's authentication status.
+Implement route protection to ensure all application features (verification flows, cases, admin) require authentication. Unauthenticated users attempting to access protected routes are redirected to the login page.
 
 ## Checklist
-- [ ] Route guard mechanism that intercepts unauthenticated users and redirects them to the login page
-- [ ] Apply the protection to all feature areas: Verification workflows, Case management, and Admin sections
-- [ ] Update the main navigation bar to display "Log in" and "Register" options for guest visitors
-- [ ] Update the main navigation bar to show the logged-in user's email address and a "Sign out" button for authenticated users
+- [x] Create ProtectedRoute component that checks auth state
+- [x] Wrap all verify/* pages with ProtectedRoute
+- [x] Wrap cases/* pages with ProtectedRoute
+- [x] Wrap admin/* pages with ProtectedRoute
+- [x] Update Navigation to hide protected links when not logged in
 
 ## Acceptance
-- Navigating directly to a protected feature URL while logged out forces a redirect to the login page.
-- The top navigation correctly displays user controls based on whether someone is logged in or a guest.
+- Unauthenticated users attempting to access /verify, /cases, or /admin are redirected to /auth/login.
+- The navigation bar shows "Log in" and "Register" buttons for guests, or user email and "Sign out" for authenticated users.
 - Clicking "Sign out" successfully ends the session and returns the user to a public page.
