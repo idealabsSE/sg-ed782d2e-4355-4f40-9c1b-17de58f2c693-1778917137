@@ -1,6 +1,6 @@
 ---
 title: Internal Reviewer Operations
-status: in_progress
+status: done
 priority: medium
 type: feature
 tags: [admin, review, operations]
