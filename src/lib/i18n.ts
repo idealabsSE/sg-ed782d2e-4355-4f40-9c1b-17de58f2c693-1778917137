@@ -58,7 +58,44 @@ export type TranslationKey =
   | "property.notFound.suggestions.cadastralFormat"
   | "property.notFound.suggestions.contact"
   | "property.notFound.tryAgain"
-  | "property.types.apartment";
+  | "property.types.apartment"
+  | "identity.swedish.title"
+  | "identity.swedish.description"
+  | "identity.swedish.heading"
+  | "identity.swedish.subheading"
+  | "identity.wizard.step"
+  | "identity.wizard.continue"
+  | "identity.wizard.back"
+  | "identity.role.title"
+  | "identity.role.description"
+  | "identity.role.tenant"
+  | "identity.role.tenantDesc"
+  | "identity.role.host"
+  | "identity.role.hostDesc"
+  | "identity.documents.title"
+  | "identity.documents.description"
+  | "identity.documents.type"
+  | "identity.documents.selectType"
+  | "identity.documents.personnummer"
+  | "identity.documents.idCard"
+  | "identity.documents.passport"
+  | "identity.documents.idNumber"
+  | "identity.documents.idHelp"
+  | "identity.documents.upload"
+  | "identity.documents.uploadPrompt"
+  | "identity.documents.uploadHelp"
+  | "identity.review.title"
+  | "identity.review.description"
+  | "identity.review.role"
+  | "identity.review.verified"
+  | "identity.review.documentType"
+  | "identity.review.idNumber"
+  | "identity.review.documents"
+  | "identity.review.trustSignals"
+  | "identity.review.signal.identity"
+  | "identity.review.signal.documents"
+  | "identity.review.signal.role"
+  | "identity.review.submit";
 
 const translations: Record<Locale, Record<TranslationKey, string>> = {
   en: {
@@ -113,6 +150,43 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.notFound.suggestions.contact": "Contact support if the property should exist in our system",
     "property.notFound.tryAgain": "Try Another Search",
     "property.types.apartment": "Apartment",
+    "identity.swedish.title": "Swedish Identity Verification - TrustPlatform",
+    "identity.swedish.description": "Verify your Swedish identity for cross-border rental transactions",
+    "identity.swedish.heading": "Swedish Identity Verification",
+    "identity.swedish.subheading": "Complete your identity verification to establish trust with hosts and tenants",
+    "identity.wizard.step": "Step",
+    "identity.wizard.continue": "Continue",
+    "identity.wizard.back": "Back",
+    "identity.role.title": "Select Your Role",
+    "identity.role.description": "Choose whether you're verifying as a tenant or host",
+    "identity.role.tenant": "Tenant",
+    "identity.role.tenantDesc": "I'm looking to rent a property and need to verify my identity",
+    "identity.role.host": "Host",
+    "identity.role.hostDesc": "I'm offering a property for rent and need to verify my identity",
+    "identity.documents.title": "Identity Documents",
+    "identity.documents.description": "Provide your Swedish identity documentation",
+    "identity.documents.type": "Document Type",
+    "identity.documents.selectType": "Select document type",
+    "identity.documents.personnummer": "Personnummer (Swedish ID Number)",
+    "identity.documents.idCard": "Swedish ID Card",
+    "identity.documents.passport": "Swedish Passport",
+    "identity.documents.idNumber": "ID Number",
+    "identity.documents.idHelp": "Enter your identification number exactly as shown on your document",
+    "identity.documents.upload": "Upload Documents",
+    "identity.documents.uploadPrompt": "Click to upload or drag files here",
+    "identity.documents.uploadHelp": "Upload clear photos or scans of your ID document (JPEG, PNG, PDF)",
+    "identity.review.title": "Verification Summary",
+    "identity.review.description": "Review your information before submitting",
+    "identity.review.role": "Role",
+    "identity.review.verified": "Verified",
+    "identity.review.documentType": "Document Type",
+    "identity.review.idNumber": "ID Number",
+    "identity.review.documents": "Uploaded Documents",
+    "identity.review.trustSignals": "Trust Signals",
+    "identity.review.signal.identity": "Swedish identity verified via official documentation",
+    "identity.review.signal.documents": "Government-issued ID uploaded and validated",
+    "identity.review.signal.role": "Role declared and confirmed",
+    "identity.review.submit": "Submit Verification",
   },
   sv: {
     "nav.home": "Hem",
@@ -166,6 +240,43 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.notFound.suggestions.contact": "Kontakta support om fastigheten borde finnas i vårt system",
     "property.notFound.tryAgain": "Försök Igen",
     "property.types.apartment": "Lägenhet",
+    "identity.swedish.title": "Svensk Identitetsverifiering - TrustPlatform",
+    "identity.swedish.description": "Verifiera din svenska identitet för gränsöverskridande hyrestransaktioner",
+    "identity.swedish.heading": "Svensk Identitetsverifiering",
+    "identity.swedish.subheading": "Slutför din identitetsverifiering för att etablera förtroende med värdar och hyresgäster",
+    "identity.wizard.step": "Steg",
+    "identity.wizard.continue": "Fortsätt",
+    "identity.wizard.back": "Tillbaka",
+    "identity.role.title": "Välj Din Roll",
+    "identity.role.description": "Välj om du verifierar som hyresgäst eller värd",
+    "identity.role.tenant": "Hyresgäst",
+    "identity.role.tenantDesc": "Jag söker att hyra en fastighet och behöver verifiera min identitet",
+    "identity.role.host": "Värd",
+    "identity.role.hostDesc": "Jag erbjuder en fastighet för uthyrning och behöver verifiera min identitet",
+    "identity.documents.title": "Identitetshandlingar",
+    "identity.documents.description": "Tillhandahåll din svenska identitetsdokumentation",
+    "identity.documents.type": "Dokumenttyp",
+    "identity.documents.selectType": "Välj dokumenttyp",
+    "identity.documents.personnummer": "Personnummer",
+    "identity.documents.idCard": "Svenskt ID-kort",
+    "identity.documents.passport": "Svenskt Pass",
+    "identity.documents.idNumber": "ID-nummer",
+    "identity.documents.idHelp": "Ange ditt identifikationsnummer exakt som det visas på ditt dokument",
+    "identity.documents.upload": "Ladda Upp Dokument",
+    "identity.documents.uploadPrompt": "Klicka för att ladda upp eller dra filer hit",
+    "identity.documents.uploadHelp": "Ladda upp tydliga foton eller skanningar av ditt ID-dokument (JPEG, PNG, PDF)",
+    "identity.review.title": "Verifieringssammanfattning",
+    "identity.review.description": "Granska din information innan du skickar in",
+    "identity.review.role": "Roll",
+    "identity.review.verified": "Verifierad",
+    "identity.review.documentType": "Dokumenttyp",
+    "identity.review.idNumber": "ID-nummer",
+    "identity.review.documents": "Uppladdade Dokument",
+    "identity.review.trustSignals": "Förtroende Signaler",
+    "identity.review.signal.identity": "Svensk identitet verifierad via officiell dokumentation",
+    "identity.review.signal.documents": "Statligt utfärdat ID uppladdat och validerat",
+    "identity.review.signal.role": "Roll deklarerad och bekräftad",
+    "identity.review.submit": "Skicka Verifiering",
   },
   es: {
     "nav.home": "Inicio",
@@ -219,6 +330,43 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "property.notFound.suggestions.contact": "Contacta con soporte si la propiedad debería existir en nuestro sistema",
     "property.notFound.tryAgain": "Intentar Nueva Búsqueda",
     "property.types.apartment": "Apartamento",
+    "identity.swedish.title": "Verificación de Identidad Sueca - TrustPlatform",
+    "identity.swedish.description": "Verifica tu identidad sueca para transacciones de alquiler transfronterizas",
+    "identity.swedish.heading": "Verificación de Identidad Sueca",
+    "identity.swedish.subheading": "Completa tu verificación de identidad para establecer confianza con anfitriones e inquilinos",
+    "identity.wizard.step": "Paso",
+    "identity.wizard.continue": "Continuar",
+    "identity.wizard.back": "Atrás",
+    "identity.role.title": "Selecciona Tu Rol",
+    "identity.role.description": "Elige si estás verificando como inquilino o anfitrión",
+    "identity.role.tenant": "Inquilino",
+    "identity.role.tenantDesc": "Busco alquilar una propiedad y necesito verificar mi identidad",
+    "identity.role.host": "Anfitrión",
+    "identity.role.hostDesc": "Ofrezco una propiedad en alquiler y necesito verificar mi identidad",
+    "identity.documents.title": "Documentos de Identidad",
+    "identity.documents.description": "Proporciona tu documentación de identidad sueca",
+    "identity.documents.type": "Tipo de Documento",
+    "identity.documents.selectType": "Selecciona tipo de documento",
+    "identity.documents.personnummer": "Personnummer (Número ID Sueco)",
+    "identity.documents.idCard": "Tarjeta de Identidad Sueca",
+    "identity.documents.passport": "Pasaporte Sueco",
+    "identity.documents.idNumber": "Número de Identificación",
+    "identity.documents.idHelp": "Introduce tu número de identificación exactamente como aparece en tu documento",
+    "identity.documents.upload": "Subir Documentos",
+    "identity.documents.uploadPrompt": "Haz clic para subir o arrastra archivos aquí",
+    "identity.documents.uploadHelp": "Sube fotos claras o escaneos de tu documento de identidad (JPEG, PNG, PDF)",
+    "identity.review.title": "Resumen de Verificación",
+    "identity.review.description": "Revisa tu información antes de enviar",
+    "identity.review.role": "Rol",
+    "identity.review.verified": "Verificado",
+    "identity.review.documentType": "Tipo de Documento",
+    "identity.review.idNumber": "Número de Identificación",
+    "identity.review.documents": "Documentos Subidos",
+    "identity.review.trustSignals": "Señales de Confianza",
+    "identity.review.signal.identity": "Identidad sueca verificada mediante documentación oficial",
+    "identity.review.signal.documents": "ID emitido por el gobierno subido y validado",
+    "identity.review.signal.role": "Rol declarado y confirmado",
+    "identity.review.submit": "Enviar Verificación",
   },
 };
 
