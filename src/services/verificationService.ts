@@ -109,7 +109,7 @@ export const verificationService = {
           action: "view",
           resourceType: "verification",
           resourceId: id,
-          metadata: { verificationType: data.verification_type, status: data.status }
+          metadata: { documentType: data.document_type, status: data.status }
         });
       }
 
