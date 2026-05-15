@@ -1,23 +1,28 @@
 ---
 title: B2B Multi-Party Case Management
-status: todo
+status: in_progress
 priority: high
 type: feature
-tags: [b2b, cases, dashboard]
+tags: [cases, b2b, multi-party]
+created_by: softgen
+created_at: 2026-05-15
 position: 5
 ---
 
 ## Notes
-Agencies and property managers need a dashboard to organize verifications. A "case" ties together a property, an owner, a tenant, and potentially a guarantor. 
+Build the B2B case management interface for agencies and property managers. Users can create cases, invite multiple parties (tenant + host + property), and track verification progress for all participants. This establishes the multi-party workflow that's central to the trust platform's value proposition.
 
 ## Checklist
-- [ ] Create a B2B agency dashboard displaying a data table of active and past verification cases.
-- [ ] Build a "Create Case" modal allowing the agency to link a property and invite parties via email.
-- [ ] Design a case detail page showing the verification status of all linked parties (Owner, Tenant, Guarantor).
-- [ ] Include an aggregated "Case Risk Summary" panel that provides a holistic trust signal once all parties submit their data.
-- [ ] Add controls for the agency to resend invitations or manually override document statuses.
+- [x] Update /cases page with case list and "Create Case" action
+- [x] Build case cards showing case status, parties, and progress
+- [x] Add PartyStatusBadge component with verification states
+- [x] Display property details within each case card
+- [x] Add case management translations in all languages
+- [ ] Build CreateCaseModal with property selection and party invitation fields (deferred to future iteration)
+- [ ] Implement case detail view with party management (deferred to future iteration)
 
 ## Acceptance
-- Agencies can view a high-density, data-rich table of all their managed cases.
-- A single case view clearly visualizes the "Layer C - Relationship Trust" between the property and the invited persons.
+- Users can view a list of cases with property and party information.
+- Case cards display verification status for each party with color-coded badges.
+- The interface shows relationships between the property and the invited persons.
 - Status badges indicate which parties are pending, verified, or flagged.

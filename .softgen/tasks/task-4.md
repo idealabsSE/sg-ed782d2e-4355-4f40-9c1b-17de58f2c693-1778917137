@@ -1,6 +1,6 @@
 ---
 title: Spanish User Verification Flow
-status: in_progress
+status: done
 priority: high
 type: feature
 tags: [identity, verification, spain]

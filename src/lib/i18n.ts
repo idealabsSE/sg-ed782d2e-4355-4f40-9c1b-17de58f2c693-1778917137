@@ -101,7 +101,15 @@ export type TranslationKey =
   | "identity.review.signal.identity"
   | "identity.review.signal.documents"
   | "identity.review.signal.role"
-  | "identity.review.submit";
+  | "identity.review.submit"
+  | "cases.page.title"
+  | "cases.page.description"
+  | "cases.page.heading"
+  | "cases.page.subheading"
+  | "cases.create"
+  | "cases.created"
+  | "cases.parties"
+  | "cases.viewDetails";
 
 const translations: Record<Locale, Record<TranslationKey, string>> = {
   en: {
@@ -199,6 +207,14 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.review.signal.documents": "Government-issued ID uploaded and validated",
     "identity.review.signal.role": "Role declared and confirmed",
     "identity.review.submit": "Submit Verification",
+    "cases.page.title": "Case Management - TrustPlatform",
+    "cases.page.description": "Manage verification cases for rental transactions",
+    "cases.page.heading": "Case Management",
+    "cases.page.subheading": "Track multi-party verification cases for rental properties",
+    "cases.create": "Create Case",
+    "cases.created": "Created",
+    "cases.parties": "Parties",
+    "cases.viewDetails": "View Details",
   },
   sv: {
     "nav.home": "Hem",
@@ -295,6 +311,14 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.review.signal.documents": "Statligt utfärdat ID uppladdat och validerat",
     "identity.review.signal.role": "Roll deklarerad och bekräftad",
     "identity.review.submit": "Skicka Verifiering",
+    "cases.page.title": "Ärendehantering - TrustPlatform",
+    "cases.page.description": "Hantera verifieringsärenden för hyrestransaktioner",
+    "cases.page.heading": "Ärendehantering",
+    "cases.page.subheading": "Spåra flerparts-verifieringsärenden för hyresfastigheter",
+    "cases.create": "Skapa Ärende",
+    "cases.created": "Skapad",
+    "cases.parties": "Parter",
+    "cases.viewDetails": "Visa Detaljer",
   },
   es: {
     "nav.home": "Inicio",
@@ -391,6 +415,14 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
     "identity.review.signal.documents": "ID emitido por el gobierno subido y validado",
     "identity.review.signal.role": "Rol declarado y confirmado",
     "identity.review.submit": "Enviar Verificación",
+    "cases.page.title": "Gestión de Casos - TrustPlatform",
+    "cases.page.description": "Gestiona casos de verificación para transacciones de alquiler",
+    "cases.page.heading": "Gestión de Casos",
+    "cases.page.subheading": "Rastrea casos de verificación multipartitos para propiedades de alquiler",
+    "cases.create": "Crear Caso",
+    "cases.created": "Creado",
+    "cases.parties": "Partes",
+    "cases.viewDetails": "Ver Detalles",
   },
 };
 
