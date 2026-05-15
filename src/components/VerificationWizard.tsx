@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -7,8 +8,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { User, Upload, CheckCircle, ArrowRight, ArrowLeft, FileText } from "lucide-react";
+import { User, Upload, CheckCircle, ArrowRight, ArrowLeft, FileText, Loader2 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { verificationService } from "@/services/verificationService";
+import { useToast } from "@/hooks/use-toast";
 
 type VerificationStep = "role" | "documents" | "review";
 type UserRole = "tenant" | "host" | "";
@@ -29,7 +32,10 @@ interface VerificationWizardProps {
 
 export function VerificationWizard({ variant = "swedish" }: VerificationWizardProps) {
   const { t } = useTranslation();
+  const router = useRouter();
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState<VerificationStep>("role");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [data, setData] = useState<VerificationData>({
     role: "",
     documentType: "",
@@ -75,6 +81,49 @@ export function VerificationWizard({ variant = "swedish" }: VerificationWizardPr
       setCurrentStep("role");
     } else if (currentStep === "review") {
       setCurrentStep("documents");
+    }
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const { data: verification, error } = await verificationService.createVerification({
+        role: data.role as "tenant" | "host",
+        country: variant === "swedish" ? "sweden" : "spain",
+        document_type: data.documentType,
+        document_number: data.idNumber,
+        status: "pending",
+      });
+
+      console.log("Verification submitted:", { verification, error });
+
+      if (error) {
+        toast({
+          title: t("identity.submission.error"),
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: t("identity.submission.success"),
+        description: t("identity.submission.successDesc"),
+      });
+
+      setTimeout(() => {
+        router.push("/verify/ownership");
+      }, 1500);
+    } catch (err) {
+      console.error("Verification submission error:", err);
+      toast({
+        title: t("identity.submission.error"),
+        description: t("common.error"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -262,7 +311,7 @@ export function VerificationWizard({ variant = "swedish" }: VerificationWizardPr
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">{t("identity.review.idNumber")}</p>
-                  <p className="text-sm font-mono data-value">{data.idNumber}</p>
+                  <p className="text-sm font-mono tabular-nums">{data.idNumber}</p>
                 </div>
               </div>
 
@@ -298,13 +347,22 @@ export function VerificationWizard({ variant = "swedish" }: VerificationWizardPr
             </div>
 
             <div className="flex gap-3">
-              <Button onClick={handleBack} variant="outline" className="gap-2">
+              <Button onClick={handleBack} variant="outline" className="gap-2" disabled={isSubmitting}>
                 <ArrowLeft className="h-4 w-4" />
                 {t("identity.wizard.back")}
               </Button>
-              <Button className="flex-1 gap-2">
-                {t("identity.review.submit")}
-                <CheckCircle className="h-4 w-4" />
+              <Button onClick={handleSubmit} disabled={isSubmitting} className="flex-1 gap-2">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {t("common.submitting")}
+                  </>
+                ) : (
+                  <>
+                    {t("identity.review.submit")}
+                    <CheckCircle className="h-4 w-4" />
+                  </>
+                )}
               </Button>
             </div>
           </CardContent>
