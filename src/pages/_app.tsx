@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "@/contexts/ThemeProvider";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <main className="flex-1">
             <Component {...pageProps} />
           </main>
+          <Footer />
         </div>
       </LocaleProvider>
     </ThemeProvider>
