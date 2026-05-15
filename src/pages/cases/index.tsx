@@ -1,60 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Building, Users, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { Plus, Building, Users, CheckCircle, Clock, AlertCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
-
-interface CaseItem {
-  id: string;
-  property: {
-    address: string;
-    cadastralRef: string;
-  };
-  parties: {
-    role: "tenant" | "host";
-    name: string;
-    email: string;
-    status: "pending" | "verified" | "flagged";
-  }[];
-  createdAt: string;
-  status: "active" | "complete" | "flagged";
-}
-
-const mockCases: CaseItem[] = [
-  {
-    id: "CASE-2024-001",
-    property: {
-      address: "Carrer de la Marina, 156, Barcelona",
-      cadastralRef: "9872023VG1797N0001WX",
-    },
-    parties: [
-      { role: "tenant", name: "Erik Andersson", email: "erik@example.se", status: "verified" },
-      { role: "host", name: "María González", email: "maria@example.es", status: "pending" },
-    ],
-    createdAt: "2024-05-10",
-    status: "active",
-  },
-  {
-    id: "CASE-2024-002",
-    property: {
-      address: "Calle Gran Vía, 28, Madrid",
-      cadastralRef: "1234567AB8901C0001DE",
-    },
-    parties: [
-      { role: "tenant", name: "Anna Svensson", email: "anna@example.se", status: "verified" },
-      { role: "host", name: "Carlos Ruiz", email: "carlos@example.es", status: "verified" },
-    ],
-    createdAt: "2024-05-08",
-    status: "complete",
-  },
-];
+import { caseService, type CaseWithDetails } from "@/services/caseService";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CasesPage() {
   const { t } = useTranslation();
-  const [cases] = useState<CaseItem[]>(mockCases);
+  const { toast } = useToast();
+  const [cases, setCases] = useState<CaseWithDetails[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadCases();
+  }, []);
+
+  const loadCases = async () => {
+    setIsLoading(true);
+    const { data, error } = await caseService.getUserCases();
+    
+    console.log("Cases loaded:", { data, error });
+
+    if (error) {
+      toast({
+        title: t("common.error"),
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      setCases(data);
+    }
+    setIsLoading(false);
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -82,6 +63,27 @@ export default function CasesPage() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString();
+  };
+
+  if (isLoading) {
+    return (
+      <>
+        <SEO
+          title={t("cases.page.title")}
+          description={t("cases.page.description")}
+        />
+        <div className="container py-12">
+          <div className="flex flex-col items-center justify-center py-24 space-y-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-sm text-muted-foreground">{t("common.loading")}</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <SEO
@@ -103,75 +105,101 @@ export default function CasesPage() {
             </Button>
           </div>
 
-          <div className="grid gap-6">
-            {cases.map((caseItem) => (
-              <Card key={caseItem.id}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <CardTitle className="flex items-center gap-2">
-                        <span className="font-mono text-base">{caseItem.id}</span>
-                        <Badge
-                          variant={caseItem.status === "complete" ? "default" : caseItem.status === "flagged" ? "destructive" : "secondary"}
-                          className={caseItem.status === "complete" ? "bg-accent" : ""}
-                        >
-                          {caseItem.status}
-                        </Badge>
-                      </CardTitle>
-                      <CardDescription>
-                        {t("cases.created")}: {new Date(caseItem.createdAt).toLocaleDateString()}
-                      </CardDescription>
+          {cases.length === 0 ? (
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center py-12 space-y-4">
+                <Users className="h-12 w-12 text-muted-foreground" />
+                <div className="text-center space-y-2">
+                  <h3 className="text-lg font-medium">{t("cases.noCases")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("cases.noCasesDesc")}</p>
+                </div>
+                <Button className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  {t("cases.createFirst")}
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid gap-6">
+              {cases.map((caseItem) => (
+                <Card key={caseItem.id}>
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-1">
+                        <CardTitle className="flex items-center gap-2">
+                          <span className="font-mono text-base">{caseItem.case_number}</span>
+                          <Badge
+                            variant={caseItem.status === "complete" ? "default" : caseItem.status === "flagged" ? "destructive" : "secondary"}
+                            className={caseItem.status === "complete" ? "bg-accent" : ""}
+                          >
+                            {caseItem.status}
+                          </Badge>
+                        </CardTitle>
+                        <CardDescription>
+                          {t("cases.created")}: {formatDate(caseItem.created_at)}
+                        </CardDescription>
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-start gap-3 p-4 bg-muted rounded-lg">
-                    <Building className="h-5 w-5 text-muted-foreground mt-0.5" />
-                    <div className="flex-1 space-y-1">
-                      <p className="font-medium">{caseItem.property.address}</p>
-                      <p className="text-sm text-muted-foreground font-mono data-value">
-                        {caseItem.property.cadastralRef}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm font-medium">
-                      <Users className="h-4 w-4" />
-                      {t("cases.parties")}
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {caseItem.parties.map((party, index) => (
-                        <div key={index} className="flex items-start gap-3 p-3 border rounded-lg">
-                          <div className="flex-1 space-y-1">
-                            <div className="flex items-center gap-2">
-                              <Badge variant="outline" className="capitalize">
-                                {party.role}
-                              </Badge>
-                              <Badge variant={getStatusVariant(party.status)} className={party.status === "verified" ? "bg-accent" : ""}>
-                                {getStatusIcon(party.status)}
-                                <span className="ml-1 capitalize">{party.status}</span>
-                              </Badge>
-                            </div>
-                            <p className="font-medium">{party.name}</p>
-                            <p className="text-sm text-muted-foreground">{party.email}</p>
-                          </div>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {caseItem.property && (
+                      <div className="flex items-start gap-3 p-4 bg-muted rounded-lg">
+                        <Building className="h-5 w-5 text-muted-foreground mt-0.5" />
+                        <div className="flex-1 space-y-1">
+                          <p className="font-medium">{caseItem.property.address}</p>
+                          <p className="text-sm text-muted-foreground font-mono data-value">
+                            {caseItem.property.cadastral_reference}
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </div>
+                    )}
 
-                  <div className="flex justify-end">
-                    <Link href={`/cases/${caseItem.id}`}>
-                      <Button variant="outline">
-                        {t("cases.viewDetails")}
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    {caseItem.parties && caseItem.parties.length > 0 && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-sm font-medium">
+                          <Users className="h-4 w-4" />
+                          {t("cases.parties")}
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {caseItem.parties.map((party) => (
+                            <div key={party.id} className="flex items-start gap-3 p-3 border rounded-lg">
+                              <div className="flex-1 space-y-1">
+                                <div className="flex items-center gap-2">
+                                  <Badge variant="outline" className="capitalize">
+                                    {party.role}
+                                  </Badge>
+                                  {party.verification && (
+                                    <Badge variant={getStatusVariant(party.verification.status)} className={party.verification.status === "verified" ? "bg-accent" : ""}>
+                                      {getStatusIcon(party.verification.status)}
+                                      <span className="ml-1 capitalize">{party.verification.status}</span>
+                                    </Badge>
+                                  )}
+                                </div>
+                                {party.profile && (
+                                  <>
+                                    <p className="font-medium">{party.profile.full_name || party.profile.email}</p>
+                                    <p className="text-sm text-muted-foreground">{party.profile.email}</p>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex justify-end">
+                      <Link href={`/cases/${caseItem.id}`}>
+                        <Button variant="outline">
+                          {t("cases.viewDetails")}
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
