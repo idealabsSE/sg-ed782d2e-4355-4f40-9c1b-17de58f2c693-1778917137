@@ -1,9 +1,13 @@
 ---
 title: GDPR Compliance Module
-status: todo
+status: in_progress
 priority: high
 type: feature
-tags: [backend, gdpr, compliance, privacy]
+tags:
+- backend
+- gdpr
+- compliance
+- privacy
 created_by: softgen
 created_at: 2026-05-15
 position: 12
@@ -13,15 +17,15 @@ position: 12
 Implement GDPR compliance infrastructure per PRD Section 14. This is mandatory before commercial launch and shapes every data handling decision in the platform.
 
 ## Checklist
-- [ ] Create `data_processing_records` table and management interface
-- [ ] Build DSAR (Data Subject Request) intake workflow
-- [ ] Implement DSAR processing: access, erasure, portability handlers
-- [ ] Create retention policy configuration per data category
+- [x] Create `data_processing_records` table and management interface
+- [x] Build DSAR (Data Subject Request) intake workflow
+- [x] Implement DSAR processing: access, erasure, portability handlers
+- [x] Create retention policy configuration per data category
 - [ ] Build automated retention sweep Edge Functions
-- [ ] Add `vendor_registry` for third-party processor tracking
-- [ ] Create consent management interface
-- [ ] Document legal basis for each processing activity
-- [ ] Build GDPR compliance dashboard for ops
+- [x] Add `vendor_registry` for third-party processor tracking
+- [x] Create consent management interface
+- [x] Document legal basis for each processing activity
+- [x] Build GDPR compliance dashboard for ops
 
 ## Acceptance
 - DSAR requests can be submitted and tracked through lifecycle

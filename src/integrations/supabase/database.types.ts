@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -191,6 +191,176 @@ export type Database = {
         }
         Relationships: []
       }
+      consent_records: {
+        Row: {
+          consent_method: string
+          consent_type: string
+          created_at: string
+          granted: boolean
+          granted_at: string | null
+          id: string
+          ip_address: string | null
+          purpose: string
+          updated_at: string
+          user_agent: string | null
+          user_id: string
+          withdrawn_at: string | null
+        }
+        Insert: {
+          consent_method: string
+          consent_type: string
+          created_at?: string
+          granted: boolean
+          granted_at?: string | null
+          id?: string
+          ip_address?: string | null
+          purpose: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id: string
+          withdrawn_at?: string | null
+        }
+        Update: {
+          consent_method?: string
+          consent_type?: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          ip_address?: string | null
+          purpose?: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string
+          withdrawn_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consent_records_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_processing_records: {
+        Row: {
+          activity_name: string
+          created_at: string
+          data_categories: string[]
+          data_subjects: string[]
+          id: string
+          is_active: boolean
+          legal_basis: string
+          purpose: string
+          recipients: string[] | null
+          retention_period: string
+          security_measures: string
+          transfer_safeguards: string | null
+          transfers_outside_eu: boolean
+          updated_at: string
+        }
+        Insert: {
+          activity_name: string
+          created_at?: string
+          data_categories: string[]
+          data_subjects: string[]
+          id?: string
+          is_active?: boolean
+          legal_basis: string
+          purpose: string
+          recipients?: string[] | null
+          retention_period: string
+          security_measures: string
+          transfer_safeguards?: string | null
+          transfers_outside_eu?: boolean
+          updated_at?: string
+        }
+        Update: {
+          activity_name?: string
+          created_at?: string
+          data_categories?: string[]
+          data_subjects?: string[]
+          id?: string
+          is_active?: boolean
+          legal_basis?: string
+          purpose?: string
+          recipients?: string[] | null
+          retention_period?: string
+          security_measures?: string
+          transfer_safeguards?: string | null
+          transfers_outside_eu?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      data_subject_requests: {
+        Row: {
+          completed_at: string | null
+          completed_by: string | null
+          created_at: string
+          deadline: string
+          id: string
+          notes: string | null
+          rejection_reason: string | null
+          request_type: string
+          requester_email: string
+          requester_id: string | null
+          response_data: Json | null
+          status: string
+          submitted_at: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          deadline: string
+          id?: string
+          notes?: string | null
+          rejection_reason?: string | null
+          request_type: string
+          requester_email: string
+          requester_id?: string | null
+          response_data?: Json | null
+          status?: string
+          submitted_at?: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          deadline?: string
+          id?: string
+          notes?: string | null
+          rejection_reason?: string | null
+          request_type?: string
+          requester_email?: string
+          requester_id?: string | null
+          response_data?: Json | null
+          status?: string
+          submitted_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_subject_requests_completed_by_fkey"
+            columns: ["completed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "data_subject_requests_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ownership_documents: {
         Row: {
           created_at: string | null
@@ -358,6 +528,42 @@ export type Database = {
           source?: string
           source_id?: string
           status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      retention_policies: {
+        Row: {
+          created_at: string
+          data_category: string
+          deletion_method: string
+          id: string
+          is_active: boolean
+          last_sweep_at: string | null
+          legal_basis: string
+          retention_period_days: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data_category: string
+          deletion_method: string
+          id?: string
+          is_active?: boolean
+          last_sweep_at?: string | null
+          legal_basis: string
+          retention_period_days: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data_category?: string
+          deletion_method?: string
+          id?: string
+          is_active?: boolean
+          last_sweep_at?: string | null
+          legal_basis?: string
+          retention_period_days?: number
           updated_at?: string
         }
         Relationships: []
@@ -537,6 +743,72 @@ export type Database = {
           run_at?: string
           snapshot_hash?: string | null
           source?: string
+        }
+        Relationships: []
+      }
+      vendor_registry: {
+        Row: {
+          contact_email: string | null
+          contact_name: string | null
+          created_at: string
+          data_categories: string[]
+          dpa_expires_date: string | null
+          dpa_signed: boolean
+          dpa_signed_date: string | null
+          eu_based: boolean
+          id: string
+          last_audit_date: string | null
+          next_audit_date: string | null
+          notes: string | null
+          privacy_policy_url: string | null
+          security_certifications: string[] | null
+          service_provided: string
+          status: string
+          updated_at: string
+          vendor_name: string
+          vendor_type: string
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_name?: string | null
+          created_at?: string
+          data_categories: string[]
+          dpa_expires_date?: string | null
+          dpa_signed?: boolean
+          dpa_signed_date?: string | null
+          eu_based?: boolean
+          id?: string
+          last_audit_date?: string | null
+          next_audit_date?: string | null
+          notes?: string | null
+          privacy_policy_url?: string | null
+          security_certifications?: string[] | null
+          service_provided: string
+          status?: string
+          updated_at?: string
+          vendor_name: string
+          vendor_type: string
+        }
+        Update: {
+          contact_email?: string | null
+          contact_name?: string | null
+          created_at?: string
+          data_categories?: string[]
+          dpa_expires_date?: string | null
+          dpa_signed?: boolean
+          dpa_signed_date?: string | null
+          eu_based?: boolean
+          id?: string
+          last_audit_date?: string | null
+          next_audit_date?: string | null
+          notes?: string | null
+          privacy_policy_url?: string | null
+          security_certifications?: string[] | null
+          service_provided?: string
+          status?: string
+          updated_at?: string
+          vendor_name?: string
+          vendor_type?: string
         }
         Relationships: []
       }
