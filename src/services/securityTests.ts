@@ -237,6 +237,7 @@ export async function testGDPRRequestCreation(
       requester_email: otherEmail,
       request_type: "export",
       status: "pending",
+      deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     });
 
   const passed = error !== null;
