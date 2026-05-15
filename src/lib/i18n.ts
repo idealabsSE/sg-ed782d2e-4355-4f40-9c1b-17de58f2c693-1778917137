@@ -3,6 +3,10 @@ export type Locale = "en" | "sv" | "es";
 export const locales: Locale[] = ["en", "sv", "es"];
 export const defaultLocale: Locale = "en";
 
+export function isValidLocale(locale: string): locale is Locale {
+  return locales.includes(locale as Locale);
+}
+
 export type TranslationKey =
   | "nav.home"
   | "nav.verify"
