@@ -1,13 +1,10 @@
 ---
-title: 'Domain Migration: Core Services'
+title: Domain Migration - Core Services
 status: done
 priority: high
 type: chore
-tags:
-- architecture
-- refactoring
-- domain-driven
-created_by: softgen
+tags: [refactor, architecture]
+created_by: agent
 created_at: 2026-05-17
 position: 29
 ---
