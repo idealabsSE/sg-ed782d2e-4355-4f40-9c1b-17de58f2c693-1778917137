@@ -134,7 +134,61 @@ export const translations = {
       admin: "Admin",
       language: "Språk",
     },
+    home: {
+      hero: {
+        title: "Gränsöverskridande Hyresverifiering",
+        subtitle: "Bygger förtroende för spanska fastighetsuthyrningar för svenska och spanska användare",
+      },
+      cta: {
+        property: "Verifiera fastighet",
+        identity: "Verifiera identitet",
+      },
+      feature: {
+        property: {
+          title: "Fastighetsverifiering",
+          description: "Validera turistlicenser och juridisk efterlevnad",
+        },
+        identity: {
+          title: "Identitetsverifiering",
+          description: "Säker svensk och spansk identitetsverifiering",
+        },
+        ownership: {
+          title: "Ägarskapsverifiering",
+          description: "Matcha fastighetsregister med verifierade värdar",
+        },
+      },
+    },
     property: {
+      search: {
+        title: "Fastighetsverifiering",
+        description: "Ange fastighetsuppgifter för att påbörja verifiering",
+        cadastralRef: "Katasterreferens",
+        cadastralRefPlaceholder: "t.ex. 1234567AB8901C",
+        address: "Adress",
+        addressPlaceholder: "t.ex. Calle Mayor 1, Valencia",
+        submit: "Sök fastighet",
+        searching: "Söker...",
+      },
+      profile: {
+        title: "Fastighetsinformation",
+        cadastralRef: "Katasterreferens",
+        region: "Region",
+        licenseNumber: "Turistlicensnummer",
+        nextStep: "Fortsätt verifiering",
+        status: {
+          verified: "Verifierad",
+          pending: "Väntar på verifiering",
+          none: "Ingen licens",
+        },
+      },
+      compliance: {
+        title: "Efterlevnadsöversikt",
+        description: "Denna fastighet måste uppfylla följande krav för laglig uthyrning:",
+        touristLicense: "Turistlicens",
+        touristLicenseDesc: "Giltig regional turistboendelicens",
+        registration: "Fastighetsregistrering",
+        registrationDesc: "Registrerad hos lokala myndigheter",
+      },
       spotCheck: {
         button: "Live-kontroll",
         checking: "Kontrollerar SForms...",
@@ -152,6 +206,41 @@ export const translations = {
         statusNotFound: "Licensen hittades inte i registret",
         statusError: "Fel vid kontroll av licensstatus",
       },
+      notFound: {
+        title: "Fastighet hittades inte",
+        description: "Ingen fastighet hittades som matchar dina sökkriterier. Vill du skapa en ny fastighetspost?",
+      },
+    },
+    identity: {
+      swedish: {
+        title: "Svensk identitetsverifiering",
+        description: "Verifiera din svenska identitet",
+      },
+      spanish: {
+        title: "Spansk identitetsverifiering",
+        description: "Verifiera din spanska identitet",
+      },
+    },
+    cases: {
+      page: {
+        title: "Verifieringsärenden",
+        description: "Hantera verifieringsärenden",
+      },
+      create: "Skapa ärende",
+      noCases: "Inga ärenden",
+      noCasesDesc: "Du har inte skapat några verifieringsärenden än",
+    },
+    admin: {
+      page: {
+        title: "Adminpanel",
+        description: "Granska och godkänn verifieringsförfrågningar",
+      },
+      noCases: "Inga väntande granskningar",
+      noCasesDesc: "Alla verifieringsärenden har behandlats",
+    },
+    common: {
+      error: "Fel",
+      loading: "Laddar...",
     },
   },
   es: {
@@ -162,7 +251,61 @@ export const translations = {
       admin: "Admin",
       language: "Idioma",
     },
+    home: {
+      hero: {
+        title: "Verificación de Alquileres Transfronterizos",
+        subtitle: "Construyendo confianza en alquileres de propiedades españolas para usuarios suecos y españoles",
+      },
+      cta: {
+        property: "Verificar propiedad",
+        identity: "Verificar identidad",
+      },
+      feature: {
+        property: {
+          title: "Verificación de propiedad",
+          description: "Validar licencias turísticas y cumplimiento legal",
+        },
+        identity: {
+          title: "Verificación de identidad",
+          description: "Verificación segura de identidad sueca y española",
+        },
+        ownership: {
+          title: "Verificación de propiedad",
+          description: "Hacer coincidir registros de propiedad con anfitriones verificados",
+        },
+      },
+    },
     property: {
+      search: {
+        title: "Verificación de propiedad",
+        description: "Ingrese los detalles de la propiedad para comenzar la verificación",
+        cadastralRef: "Referencia catastral",
+        cadastralRefPlaceholder: "ej. 1234567AB8901C",
+        address: "Dirección",
+        addressPlaceholder: "ej. Calle Mayor 1, Valencia",
+        submit: "Buscar propiedad",
+        searching: "Buscando...",
+      },
+      profile: {
+        title: "Información de la propiedad",
+        cadastralRef: "Referencia catastral",
+        region: "Región",
+        licenseNumber: "Número de licencia turística",
+        nextStep: "Continuar verificación",
+        status: {
+          verified: "Verificado",
+          pending: "Verificación pendiente",
+          none: "Sin licencia",
+        },
+      },
+      compliance: {
+        title: "Resumen de cumplimiento",
+        description: "Esta propiedad debe cumplir con los siguientes requisitos para operar legalmente como alquiler:",
+        touristLicense: "Licencia turística",
+        touristLicenseDesc: "Licencia regional válida de alojamiento turístico",
+        registration: "Registro de propiedad",
+        registrationDesc: "Registrado con las autoridades locales",
+      },
       spotCheck: {
         button: "Verificación en vivo",
         checking: "Consultando SForms...",
@@ -180,6 +323,41 @@ export const translations = {
         statusNotFound: "Licencia no encontrada en el registro",
         statusError: "Error al verificar el estado de la licencia",
       },
+      notFound: {
+        title: "Propiedad no encontrada",
+        description: "No se encontró ninguna propiedad que coincida con sus criterios de búsqueda. ¿Le gustaría crear un nuevo registro de propiedad?",
+      },
+    },
+    identity: {
+      swedish: {
+        title: "Verificación de identidad sueca",
+        description: "Verifique su identidad sueca",
+      },
+      spanish: {
+        title: "Verificación de identidad española",
+        description: "Verifique su identidad española",
+      },
+    },
+    cases: {
+      page: {
+        title: "Casos de verificación",
+        description: "Gestionar casos de verificación",
+      },
+      create: "Crear caso",
+      noCases: "Sin casos",
+      noCasesDesc: "Aún no has creado ningún caso de verificación",
+    },
+    admin: {
+      page: {
+        title: "Panel de administración",
+        description: "Revisar y aprobar solicitudes de verificación",
+      },
+      noCases: "Sin revisiones pendientes",
+      noCasesDesc: "Todos los casos de verificación han sido procesados",
+    },
+    common: {
+      error: "Error",
+      loading: "Cargando...",
     },
   },
 };
