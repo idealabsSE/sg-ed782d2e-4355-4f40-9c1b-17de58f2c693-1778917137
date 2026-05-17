@@ -371,6 +371,59 @@ export type Database = {
           },
         ]
       }
+      national_licenses: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          holder_name: string | null
+          id: string
+          last_verified_at: string | null
+          notes: string | null
+          property_id: string
+          registered_at: string | null
+          registration_number: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          holder_name?: string | null
+          id?: string
+          last_verified_at?: string | null
+          notes?: string | null
+          property_id: string
+          registered_at?: string | null
+          registration_number: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          holder_name?: string | null
+          id?: string
+          last_verified_at?: string | null
+          notes?: string | null
+          property_id?: string
+          registered_at?: string | null
+          registration_number?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "national_licenses_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: true
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_members: {
         Row: {
           id: string

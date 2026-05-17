@@ -3,7 +3,10 @@ title: National Rental Registration (NRA) MVP
 status: todo
 priority: medium
 type: feature
-tags: [property, compliance, nra]
+tags:
+- property
+- compliance
+- nra
 created_by: softgen
 created_at: 2026-05-15
 position: 20
