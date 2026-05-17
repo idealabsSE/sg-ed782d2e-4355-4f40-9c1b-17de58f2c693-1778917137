@@ -3,7 +3,11 @@ title: Document Upload & Secure Storage System
 status: todo
 priority: high
 type: feature
-tags: [backend, storage, security, documents]
+tags:
+- backend
+- storage
+- security
+- documents
 created_by: softgen
 created_at: 2026-05-15
 position: 11

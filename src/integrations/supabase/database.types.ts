@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -566,6 +566,85 @@ export type Database = {
           },
         ]
       }
+      person_documents: {
+        Row: {
+          access_count: number
+          created_at: string
+          document_type: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          last_accessed_at: string | null
+          metadata: Json | null
+          mime_type: string
+          retention_until: string | null
+          updated_at: string
+          uploaded_at: string
+          uploaded_by: string
+          user_id: string
+          verification_id: string | null
+        }
+        Insert: {
+          access_count?: number
+          created_at?: string
+          document_type: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id?: string
+          last_accessed_at?: string | null
+          metadata?: Json | null
+          mime_type: string
+          retention_until?: string | null
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by: string
+          user_id: string
+          verification_id?: string | null
+        }
+        Update: {
+          access_count?: number
+          created_at?: string
+          document_type?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          last_accessed_at?: string | null
+          metadata?: Json | null
+          mime_type?: string
+          retention_until?: string | null
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by?: string
+          user_id?: string
+          verification_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "person_documents_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "person_documents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "person_documents_verification_id_fkey"
+            columns: ["verification_id"]
+            isOneToOne: false
+            referencedRelation: "verifications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -1053,7 +1132,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_document_access: {
+        Args: { doc_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
