@@ -1,6 +1,6 @@
 ---
 title: Auth Triggers & Middleware Hardening
-status: in_progress
+status: done
 priority: high
 type: feature
 tags:
