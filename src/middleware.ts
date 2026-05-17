@@ -1,8 +1,8 @@
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  let res = NextResponse.next({
+  const response = NextResponse.next({
     request: {
       headers: req.headers,
     },
@@ -16,35 +16,29 @@ export async function middleware(req: NextRequest) {
         get(name: string) {
           return req.cookies.get(name)?.value;
         },
-        set(name: string, value: string, options: any) {
+        set(name: string, value: string, options: CookieOptions) {
+          // Update the request cookies
           req.cookies.set({
             name,
             value,
             ...options,
           });
-          res = NextResponse.next({
-            request: {
-              headers: req.headers,
-            },
-          });
-          res.cookies.set({
+          // Update the response cookies
+          response.cookies.set({
             name,
             value,
             ...options,
           });
         },
-        remove(name: string, options: any) {
+        remove(name: string, options: CookieOptions) {
+          // Update the request cookies
           req.cookies.set({
             name,
             value: "",
             ...options,
           });
-          res = NextResponse.next({
-            request: {
-              headers: req.headers,
-            },
-          });
-          res.cookies.set({
+          // Update the response cookies
+          response.cookies.set({
             name,
             value: "",
             ...options,
@@ -56,18 +50,10 @@ export async function middleware(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
   
-  // Validate and refresh session using getUser() instead of getSession()
+  // This will refresh the session if needed
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
-
-  console.log("Middleware auth check:", {
-    pathname,
-    hasUser: !!user,
-    userEmail: user?.email,
-    error: error?.message,
-  });
 
   // Define public routes that don't require authentication
   const publicRoutes = [
@@ -84,7 +70,7 @@ export async function middleware(req: NextRequest) {
 
   // If route is public, allow access
   if (isPublicRoute) {
-    return res;
+    return response;
   }
 
   // Protected routes - require authentication
@@ -101,7 +87,6 @@ export async function middleware(req: NextRequest) {
 
   // If accessing protected route without user, redirect to login
   if (isProtectedRoute && !user) {
-    console.log("Redirecting to login - no user found for protected route:", pathname);
     const redirectUrl = req.nextUrl.clone();
     redirectUrl.pathname = "/auth/login";
     redirectUrl.searchParams.set("redirectTo", pathname);
@@ -118,7 +103,7 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  return res;
+  return response;
 }
 
 export const config = {
