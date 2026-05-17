@@ -17,14 +17,14 @@ position: 11
 Implement secure document upload and retrieval system per PRD Section 9 (Security Requirements). All user documents (ID cards, Nota Simple PDFs, financial evidence) must be stored in private Supabase Storage buckets with access via signed URLs only.
 
 ## Checklist
-- [ ] Create private Storage bucket for verification documents
-- [ ] Build document upload Edge Function with file validation (type, size, virus scanning path)
-- [ ] Implement signed URL generation with short expiry (1-hour default)
-- [ ] Create `person_documents` table for metadata (no file content in DB)
-- [ ] Add RLS policies for document access (owner + reviewer only)
-- [ ] Build document retrieval service with audit logging
-- [ ] Add document type categorization (identity, financial, ownership, other)
-- [ ] Implement document retention policy enforcement
+- [x] Create private Storage bucket for verification documents
+- [x] Build document upload Edge Function with file validation (type, size, virus scanning path)
+- [x] Implement signed URL generation with short expiry (1-hour default)
+- [x] Create `person_documents` table for metadata (no file content in DB)
+- [x] Add RLS policies for document access (owner + reviewer only)
+- [x] Build document retrieval service with audit logging
+- [x] Add document type categorization (identity, financial, ownership, other)
+- [x] Implement document retention policy enforcement
 
 ## Acceptance
 - Users can upload documents through verification flows
