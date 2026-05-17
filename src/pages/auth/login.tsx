@@ -29,9 +29,8 @@ export default function LoginPage() {
       setError(error);
       setLoading(false);
     } else {
-      // Use window.location for full page reload to ensure cookies are set
-      const redirectTo = (router.query.redirectTo as string) || "/";
-      window.location.href = redirectTo;
+      const redirectTo = (router.query.redirectTo as string) || (router.query.returnUrl as string) || "/dashboard";
+      router.push(redirectTo);
     }
   };
 

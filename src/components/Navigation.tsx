@@ -107,6 +107,9 @@ export function Navigation() {
                       {user.email}
                     </div>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+                      Dashboard
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleSignOut} className="gap-2">
                       <LogOut className="h-4 w-4" />
                       Sign out
