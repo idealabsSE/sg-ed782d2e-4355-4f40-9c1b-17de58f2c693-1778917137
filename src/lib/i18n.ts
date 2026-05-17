@@ -157,6 +157,32 @@ export const translations = {
       error: "Error",
       loading: "Loading...",
     },
+    dashboard: {
+      title: "Dashboard",
+      welcomeBack: "Welcome back,",
+      verifyProperty: {
+        title: "Verify Property",
+        description: "Check property compliance and licensing status",
+        button: "Start Verification",
+      },
+      identityVerification: {
+        title: "Identity Verification",
+        description: "Verify Swedish or Spanish identity documents",
+        swedishButton: "Swedish ID",
+        spanishButton: "Spanish ID",
+      },
+      myCases: {
+        title: "My Cases",
+        description: "View and manage verification cases",
+        button: "View Cases",
+      },
+      accountInfo: {
+        title: "Account Information",
+        description: "Your profile and settings",
+        email: "Email",
+        userId: "User ID",
+      },
+    },
   },
   sv: {
     nav: {
@@ -306,6 +332,32 @@ export const translations = {
       error: "Fel",
       loading: "Laddar...",
     },
+    dashboard: {
+      title: "Instrumentpanel",
+      welcomeBack: "Välkommen tillbaka,",
+      verifyProperty: {
+        title: "Verifiera fastighet",
+        description: "Kontrollera fastighetsefterlevnad och licensstatus",
+        button: "Starta verifiering",
+      },
+      identityVerification: {
+        title: "Identitetsverifiering",
+        description: "Verifiera svenska eller spanska identitetshandlingar",
+        swedishButton: "Svenskt ID",
+        spanishButton: "Spanskt ID",
+      },
+      myCases: {
+        title: "Mina ärenden",
+        description: "Visa och hantera verifieringsärenden",
+        button: "Visa ärenden",
+      },
+      accountInfo: {
+        title: "Kontoinformation",
+        description: "Din profil och inställningar",
+        email: "E-post",
+        userId: "Användar-ID",
+      },
+    },
   },
   es: {
     nav: {
@@ -454,6 +506,32 @@ export const translations = {
     common: {
       error: "Error",
       loading: "Cargando...",
+    },
+    dashboard: {
+      title: "Panel de control",
+      welcomeBack: "Bienvenido de nuevo,",
+      verifyProperty: {
+        title: "Verificar propiedad",
+        description: "Verificar cumplimiento de propiedad y estado de licencia",
+        button: "Iniciar verificación",
+      },
+      identityVerification: {
+        title: "Verificación de identidad",
+        description: "Verificar documentos de identidad suecos o españoles",
+        swedishButton: "ID sueco",
+        spanishButton: "ID español",
+      },
+      myCases: {
+        title: "Mis casos",
+        description: "Ver y gestionar casos de verificación",
+        button: "Ver casos",
+      },
+      accountInfo: {
+        title: "Información de la cuenta",
+        description: "Tu perfil y configuración",
+        email: "Correo electrónico",
+        userId: "ID de usuario",
+      },
     },
   },
 };
