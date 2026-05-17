@@ -54,12 +54,20 @@ export async function middleware(req: NextRequest) {
     }
   );
 
+  const { pathname } = req.nextUrl;
+  
   // Validate and refresh session using getUser() instead of getSession()
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
 
-  const { pathname } = req.nextUrl;
+  console.log("Middleware auth check:", {
+    pathname,
+    hasUser: !!user,
+    userEmail: user?.email,
+    error: error?.message,
+  });
 
   // Define public routes that don't require authentication
   const publicRoutes = [
@@ -93,6 +101,7 @@ export async function middleware(req: NextRequest) {
 
   // If accessing protected route without user, redirect to login
   if (isProtectedRoute && !user) {
+    console.log("Redirecting to login - no user found for protected route:", pathname);
     const redirectUrl = req.nextUrl.clone();
     redirectUrl.pathname = "/auth/login";
     redirectUrl.searchParams.set("redirectTo", pathname);
