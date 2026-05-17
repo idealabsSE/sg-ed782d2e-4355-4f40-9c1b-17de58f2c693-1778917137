@@ -4,12 +4,15 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  console.log("🔍 Middleware - Path:", pathname);
+
   // Skip middleware for auth pages to prevent redirect loops
   if (pathname.startsWith("/auth/")) {
+    console.log("✅ Middleware - Skipping auth page");
     return NextResponse.next();
   }
 
-  const response = NextResponse.next({
+  let response = NextResponse.next({
     request: {
       headers: request.headers,
     },
@@ -21,9 +24,12 @@ export async function middleware(request: NextRequest) {
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll();
+          const cookies = request.cookies.getAll();
+          console.log("🍪 Middleware - Cookies found:", cookies.length);
+          return cookies;
         },
         setAll(cookiesToSet) {
+          console.log("🍪 Middleware - Setting cookies:", cookiesToSet.length);
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
           );
@@ -35,7 +41,14 @@ export async function middleware(request: NextRequest) {
   // This will refresh the session if needed
   const {
     data: { user },
+    error
   } = await supabase.auth.getUser();
+
+  console.log("👤 Middleware - User check:", {
+    hasUser: !!user,
+    email: user?.email,
+    error: error?.message
+  });
 
   // Define public routes that don't require authentication
   const publicRoutes = [
@@ -50,6 +63,7 @@ export async function middleware(request: NextRequest) {
 
   // If route is public, allow access
   if (isPublicRoute) {
+    console.log("✅ Middleware - Public route, allowing access");
     return response;
   }
 
@@ -68,6 +82,7 @@ export async function middleware(request: NextRequest) {
 
   // If accessing protected route without user, redirect to login
   if (isProtectedRoute && !user) {
+    console.log("⛔ Middleware - Protected route, no user, redirecting to login");
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/auth/login";
     redirectUrl.searchParams.set("redirectTo", pathname);
@@ -78,12 +93,14 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/admin") && user) {
     const userEmail = user.email || "";
     if (!userEmail.endsWith("@xtrust.com")) {
+      console.log("⛔ Middleware - Admin route, non-admin user, redirecting");
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = "/";
       return NextResponse.redirect(redirectUrl);
     }
   }
 
+  console.log("✅ Middleware - Access granted");
   return response;
 }
 
