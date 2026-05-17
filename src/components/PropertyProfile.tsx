@@ -3,8 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight } from "lucide-react";
+import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { propertyService } from "@/services/properties/PropertyService";
+import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
 type Property = Database["public"]["Tables"]["properties"]["Row"];
@@ -15,6 +18,9 @@ interface PropertyProfileProps {
 
 export function PropertyProfile({ property }: PropertyProfileProps) {
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const [isChecking, setIsChecking] = useState(false);
+  const [spotCheckResult, setSpotCheckResult] = useState<any>(null);
 
   const licenseStatus = property.license_status || "none";
 
@@ -37,6 +43,57 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
   };
 
   const status = statusConfig[licenseStatus as keyof typeof statusConfig] || statusConfig.none;
+
+  const handleSpotCheck = async () => {
+    if (!property.license_number || !property.region) {
+      toast({
+        title: t("property.spotCheck.missingData"),
+        description: t("property.spotCheck.missingDataDesc"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsChecking(true);
+    try {
+      const { data, error } = await propertyService.performSpotCheck(
+        property.id,
+        property.license_number,
+        property.region
+      );
+
+      if (error) {
+        toast({
+          title: t("property.spotCheck.error"),
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setSpotCheckResult(data);
+      
+      const statusMessages = {
+        active: t("property.spotCheck.statusActive"),
+        inactive: t("property.spotCheck.statusInactive"),
+        not_found: t("property.spotCheck.statusNotFound"),
+        error: t("property.spotCheck.statusError"),
+      };
+
+      toast({
+        title: t("property.spotCheck.complete"),
+        description: statusMessages[data?.status || "error"],
+      });
+    } catch (err) {
+      toast({
+        title: t("property.spotCheck.error"),
+        description: t("property.spotCheck.unexpectedError"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsChecking(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -71,9 +128,53 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
           {property.license_number && (
             <>
               <Separator />
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">{t("property.profile.licenseNumber")}</p>
-                <p className="font-mono text-sm tabular-nums">{property.license_number}</p>
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <p className="text-sm text-muted-foreground">{t("property.profile.licenseNumber")}</p>
+                  <p className="font-mono text-sm tabular-nums">{property.license_number}</p>
+                </div>
+                
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSpotCheck}
+                  disabled={isChecking}
+                  className="w-full gap-2"
+                >
+                  <RefreshCw className={`h-4 w-4 ${isChecking ? "animate-spin" : ""}`} />
+                  {isChecking ? t("property.spotCheck.checking") : t("property.spotCheck.button")}
+                </Button>
+                
+                {spotCheckResult && (
+                  <div className="p-3 bg-muted rounded-md space-y-2 text-xs">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">{t("property.spotCheck.status")}</span>
+                      <Badge variant={spotCheckResult.status === "active" ? "default" : "secondary"}>
+                        {spotCheckResult.status}
+                      </Badge>
+                    </div>
+                    {spotCheckResult.details && (
+                      <>
+                        {spotCheckResult.details.holder && (
+                          <div className="flex items-start justify-between">
+                            <span className="text-muted-foreground">{t("property.spotCheck.holder")}</span>
+                            <span className="text-right">{spotCheckResult.details.holder}</span>
+                          </div>
+                        )}
+                        {spotCheckResult.details.validFrom && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-muted-foreground">{t("property.spotCheck.validFrom")}</span>
+                            <span>{spotCheckResult.details.validFrom}</span>
+                          </div>
+                        )}
+                      </>
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">{t("property.spotCheck.lastChecked")}</span>
+                      <span>{new Date(spotCheckResult.lastChecked).toLocaleString()}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}

@@ -4,6 +4,21 @@ import type { Database } from "@/integrations/supabase/types";
 type Property = Database["public"]["Tables"]["properties"]["Row"];
 type PropertyInsert = Database["public"]["Tables"]["properties"]["Insert"];
 
+interface SpotCheckResult {
+  success: boolean;
+  licenseNumber: string;
+  region: string;
+  status: "active" | "inactive" | "not_found" | "error";
+  lastChecked: string;
+  details?: {
+    holder?: string;
+    validFrom?: string;
+    validUntil?: string;
+    address?: string;
+  };
+  error?: string;
+}
+
 export const propertyService = {
   /**
    * Search for a property by cadastral reference or address
@@ -128,6 +143,39 @@ export const propertyService = {
       return { data, error: null };
     } catch (err) {
       console.error("propertyService.updateLicenseStatus error:", err);
+      return {
+        data: null,
+        error: err instanceof Error ? err : new Error("Unknown error"),
+      };
+    }
+  },
+
+  /**
+   * Perform a live SForms spot-check for a property license
+   */
+  async performSpotCheck(
+    propertyId: string,
+    licenseNumber: string,
+    region: string
+  ): Promise<{ data: SpotCheckResult | null; error: Error | null }> {
+    try {
+      const { data, error } = await supabase.functions.invoke("sforms-spot-check", {
+        body: {
+          licenseNumber,
+          region,
+          propertyId,
+        },
+      });
+
+      console.log("propertyService.performSpotCheck:", { data, error });
+
+      if (error) {
+        return { data: null, error: new Error(error.message) };
+      }
+
+      return { data, error: null };
+    } catch (err) {
+      console.error("propertyService.performSpotCheck error:", err);
       return {
         data: null,
         error: err instanceof Error ? err : new Error("Unknown error"),

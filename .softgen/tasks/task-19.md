@@ -1,9 +1,12 @@
 ---
 title: Secondary Property Spot-Check (SForms)
-status: todo
+status: done
 priority: medium
 type: feature
-tags: [property, verification, fallback]
+tags:
+- property
+- verification
+- fallback
 created_by: softgen
 created_at: 2026-05-15
 position: 19
@@ -13,10 +16,10 @@ position: 19
 Implement the secondary spot-check mechanism using the SForms-based search as required by the PRD. This acts as a manual fallback/validation tool when the primary GVA open-data ingestion does not yield a match or requires live verification.
 
 ## Checklist
-- [ ] Build Edge Function to query the regional SForms URL with XML-parameter encoding
-- [ ] Implement HTML response parser to extract basic license validity
-- [ ] Add "Live Spot-Check" button to the Property Profile UI
-- [ ] Log spot-check results to the property history timeline
+- [x] Build Edge Function to query the regional SForms URL with XML-parameter encoding
+- [x] Implement HTML response parser to extract basic license validity
+- [x] Add "Live Spot-Check" button to the Property Profile UI
+- [x] Log spot-check results to the property history timeline
 
 ## Acceptance
 - Users/Reviewers can trigger a live SForms lookup for a specific license number.
