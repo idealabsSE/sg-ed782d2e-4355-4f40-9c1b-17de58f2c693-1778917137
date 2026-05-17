@@ -54,10 +54,10 @@ export async function middleware(req: NextRequest) {
     }
   );
 
-  // Refresh session if expired
+  // Validate and refresh session using getUser() instead of getSession()
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const { pathname } = req.nextUrl;
 
@@ -91,8 +91,8 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith(route)
   );
 
-  // If accessing protected route without session, redirect to login
-  if (isProtectedRoute && !session) {
+  // If accessing protected route without user, redirect to login
+  if (isProtectedRoute && !user) {
     const redirectUrl = req.nextUrl.clone();
     redirectUrl.pathname = "/auth/login";
     redirectUrl.searchParams.set("redirectTo", pathname);
@@ -100,8 +100,8 @@ export async function middleware(req: NextRequest) {
   }
 
   // Admin routes require @xtrust.com email
-  if (pathname.startsWith("/admin") && session) {
-    const userEmail = session.user.email || "";
+  if (pathname.startsWith("/admin") && user) {
+    const userEmail = user.email || "";
     if (!userEmail.endsWith("@xtrust.com")) {
       const redirectUrl = req.nextUrl.clone();
       redirectUrl.pathname = "/";
