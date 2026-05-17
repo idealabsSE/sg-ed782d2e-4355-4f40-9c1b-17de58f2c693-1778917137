@@ -29,13 +29,9 @@ export default function LoginPage() {
       setError(error);
       setLoading(false);
     } else {
-      // Use redirectTo to match middleware parameter
+      // Use window.location for full page reload to ensure cookies are set
       const redirectTo = (router.query.redirectTo as string) || "/";
-      
-      // Small delay to ensure cookies are set before redirect
-      setTimeout(() => {
-        router.push(redirectTo);
-      }, 100);
+      window.location.href = redirectTo;
     }
   };
 
