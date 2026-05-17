@@ -19,10 +19,10 @@ The database already uses Row Level Security (RLS) to grant admin privileges to 
 The goal is to restrict the `/admin` pages and navigation links to authorized administrators only, falling back to a "Not Authorized" view or redirecting non-admins.
 
 ## Checklist
-- [ ] Update `AuthUser` interface and `AuthService.ts` to expose an `isAdmin` boolean (derived from user metadata, role, or the `@xtrust.com` email domain convention).
-- [ ] Create a new `AdminRoute` component (wrapping `ProtectedRoute`) that verifies the user has admin privileges. If they don't, render a 403 Not Authorized message or redirect to `/`.
-- [ ] Apply the new `AdminRoute` wrapper to `src/pages/admin/index.tsx`, `src/pages/admin/audit.tsx`, and `src/pages/admin/gdpr.tsx`.
-- [ ] Update `src/components/Navigation.tsx` so the "Admin" link only renders if the current `user` has the `isAdmin` flag set to true.
+- [x] Update `AuthUser` interface and `AuthService.ts` to expose an `isAdmin` boolean (derived from user metadata, role, or the `@xtrust.com` email domain convention).
+- [x] Create a new `AdminRoute` component (wrapping `ProtectedRoute`) that verifies the user has admin privileges. If they don't, render a 403 Not Authorized message or redirect to `/`.
+- [x] Apply the new `AdminRoute` wrapper to `src/pages/admin/index.tsx`, `src/pages/admin/audit.tsx`, and `src/pages/admin/gdpr.tsx`.
+- [x] Update `src/components/Navigation.tsx` so the "Admin" link only renders if the current `user` has the `isAdmin` flag set to true.
 
 ## Acceptance
 - Non-admin logged-in users do not see the "Admin" link in the top navigation.

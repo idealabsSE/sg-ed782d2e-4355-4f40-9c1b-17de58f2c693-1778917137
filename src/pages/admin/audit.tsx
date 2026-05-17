@@ -1,15 +1,15 @@
 import { SEO } from "@/components/SEO";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AdminRoute } from "@/components/AdminRoute";
 import { AuditLogDashboard } from "@/securityandaudit/ui/AuditLogDashboard";
 
 export default function AuditPage() {
   return (
-    <ProtectedRoute>
+    <AdminRoute>
       <SEO
         title="Audit Logs - X Trust Admin"
         description="Security audit logs and incident management"
       />
       <AuditLogDashboard />
-    </ProtectedRoute>
+    </AdminRoute>
   );
 }
