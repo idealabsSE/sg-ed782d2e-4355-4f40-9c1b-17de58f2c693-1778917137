@@ -1,4 +1,5 @@
 export type Locale = "en" | "sv" | "es";
+export type TranslationKey = string;
 
 export const locales: Locale[] = ["en", "sv", "es"];
 export const defaultLocale: Locale = "en";

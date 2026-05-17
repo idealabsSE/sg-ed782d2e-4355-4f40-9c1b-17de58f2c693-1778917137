@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { propertyService } from "@/services/properties/PropertyService";
+import { propertyService } from "@/properties/PropertyService";
 import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
