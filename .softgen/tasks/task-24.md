@@ -1,6 +1,6 @@
 ---
 title: Core Module Architecture & Interfaces
-status: in_progress
+status: done
 priority: urgent
 type: chore
 tags:
