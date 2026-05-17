@@ -1,6 +1,6 @@
 ---
 title: 'Domain Migration: Verification Wizard Component Splitting'
-status: todo
+status: done
 priority: high
 type: chore
 tags:
