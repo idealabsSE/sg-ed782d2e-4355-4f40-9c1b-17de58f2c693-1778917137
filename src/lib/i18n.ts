@@ -140,10 +140,16 @@ export const translations = {
       page: {
         title: "Verification Cases",
         description: "Manage verification cases",
+        heading: "Verification Cases",
+        subheading: "Manage and track verification cases for properties and parties",
       },
       create: "Create Case",
+      createFirst: "Create Your First Case",
       noCases: "No Cases",
       noCasesDesc: "You haven't created any verification cases yet",
+      created: "Created",
+      parties: "Parties",
+      viewDetails: "View Details",
     },
     admin: {
       page: {
@@ -315,10 +321,16 @@ export const translations = {
       page: {
         title: "Verifieringsärenden",
         description: "Hantera verifieringsärenden",
+        heading: "Verifieringsärenden",
+        subheading: "Hantera och spåra verifieringsärenden för fastigheter och parter",
       },
       create: "Skapa ärende",
+      createFirst: "Skapa ditt första ärende",
       noCases: "Inga ärenden",
       noCasesDesc: "Du har inte skapat några verifieringsärenden än",
+      created: "Skapad",
+      parties: "Parter",
+      viewDetails: "Visa detaljer",
     },
     admin: {
       page: {
@@ -490,10 +502,16 @@ export const translations = {
       page: {
         title: "Casos de verificación",
         description: "Gestionar casos de verificación",
+        heading: "Casos de verificación",
+        subheading: "Gestionar y realizar seguimiento de casos de verificación para propiedades y partes",
       },
       create: "Crear caso",
+      createFirst: "Crear tu primer caso",
       noCases: "Sin casos",
       noCasesDesc: "Aún no has creado ningún caso de verificación",
+      created: "Creado",
+      parties: "Partes",
+      viewDetails: "Ver detalles",
     },
     admin: {
       page: {
