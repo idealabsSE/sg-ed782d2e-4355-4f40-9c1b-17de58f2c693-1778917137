@@ -55,6 +55,7 @@ export async function middleware(request: NextRequest) {
 
   // Protected routes - require authentication
   const protectedPaths = [
+    "/dashboard",
     "/verify/identity",
     "/verify/ownership",
     "/cases",
