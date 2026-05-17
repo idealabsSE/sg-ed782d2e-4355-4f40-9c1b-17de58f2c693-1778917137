@@ -1,6 +1,6 @@
 ---
 title: Document Upload & Secure Storage System
-status: todo
+status: done
 priority: high
 type: feature
 tags:
