@@ -1,6 +1,6 @@
 ---
 title: Complete Application Translations
-status: todo
+status: done
 priority: high
 type: chore
 tags:
