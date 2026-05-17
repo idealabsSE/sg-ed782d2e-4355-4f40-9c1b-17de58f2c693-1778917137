@@ -1,9 +1,12 @@
 ---
-title: "Domain Migration: Core Services"
+title: 'Domain Migration: Core Services'
 status: todo
 priority: high
 type: chore
-tags: ["architecture", "refactoring", "domain-driven"]
+tags:
+- architecture
+- refactoring
+- domain-driven
 created_by: softgen
 created_at: 2026-05-17
 position: 29
