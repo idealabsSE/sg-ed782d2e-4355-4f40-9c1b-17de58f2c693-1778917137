@@ -1,6 +1,6 @@
 ---
 title: Admin role-based access control (RBAC)
-status: todo
+status: done
 priority: high
 type: feature
 tags:
