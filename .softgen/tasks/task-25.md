@@ -3,7 +3,10 @@ title: Auth Triggers & Middleware Hardening
 status: todo
 priority: high
 type: feature
-tags: [auth, security, phase-1]
+tags:
+- auth
+- security
+- phase-1
 created_by: softgen
 created_at: 2026-05-17
 position: 25
