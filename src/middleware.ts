@@ -2,6 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Skip middleware for auth pages to prevent redirect loops
+  if (pathname.startsWith("/auth/")) {
+    return NextResponse.next();
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -27,8 +34,6 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const { pathname } = request.nextUrl;
-  
   // This will refresh the session if needed
   const {
     data: { user },
@@ -37,8 +42,6 @@ export async function middleware(request: NextRequest) {
   // Define public routes that don't require authentication
   const publicRoutes = [
     "/",
-    "/auth/login",
-    "/auth/register",
     "/verify/property",
   ];
 
@@ -47,7 +50,7 @@ export async function middleware(request: NextRequest) {
     pathname === route || pathname.startsWith(`${route}/`)
   );
 
-  // If route is public, allow access early to prevent unnecessary redirect checks
+  // If route is public, allow access
   if (isPublicRoute) {
     return supabaseResponse;
   }

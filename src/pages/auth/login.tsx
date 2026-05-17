@@ -29,9 +29,13 @@ export default function LoginPage() {
       setError(error);
       setLoading(false);
     } else {
-      // Redirect to home or intended destination
-      const returnUrl = (router.query.returnUrl as string) || "/";
-      router.push(returnUrl);
+      // Use redirectTo to match middleware parameter
+      const redirectTo = (router.query.redirectTo as string) || "/";
+      
+      // Small delay to ensure cookies are set before redirect
+      setTimeout(() => {
+        router.push(redirectTo);
+      }, 100);
     }
   };
 
