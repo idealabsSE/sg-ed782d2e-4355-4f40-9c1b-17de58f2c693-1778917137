@@ -19,15 +19,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check active session
+    // Check active session - use getUser() for JWT validation
     const initializeAuth = async () => {
       try {
-        const session = await authService.getCurrentSession();
-        setSession(session);
+        const currentUser = await authService.getCurrentUser();
+        setUser(currentUser);
         
-        if (session) {
-          const user = await authService.getCurrentUser();
-          setUser(user);
+        if (currentUser) {
+          const session = await authService.getCurrentSession();
+          setSession(session);
         }
       } catch (error) {
         console.error("Error initializing auth:", error);
