@@ -1,6 +1,6 @@
 ---
 title: Auth Triggers & Middleware Hardening
-status: todo
+status: in_progress
 priority: high
 type: feature
 tags:
@@ -16,10 +16,10 @@ position: 25
 Implement the specific authentication requirements detailed in Phase 1.6 of the development plan. This includes backend hooks for user initialization and frontend middleware to enforce strict access control.
 
 ## Checklist
-- [ ] Create an Edge Function / Postgres Trigger to automatically create a `profiles` row when a new user signs up in Supabase Auth
-- [ ] Implement Next.js Middleware to protect all non-public routes
-- [ ] Ensure unauthenticated users are seamlessly redirected to the login flow
-- [ ] Verify that public routes (like the property compliance search) remain accessible without auth
+- [x] Create an Edge Function / Postgres Trigger to automatically create a `profiles` row when a new user signs up in Supabase Auth
+- [x] Implement Next.js Middleware to protect all non-public routes
+- [x] Ensure unauthenticated users are seamlessly redirected to the login flow
+- [x] Verify that public routes (like the property compliance search) remain accessible without auth
 
 ## Acceptance
 - A new user registration automatically yields a corresponding `profiles` record.
