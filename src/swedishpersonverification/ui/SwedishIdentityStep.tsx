@@ -10,7 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { User, Upload, CheckCircle, ArrowRight, ArrowLeft, FileText, Loader2 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { verificationService } from "@/services/verificationService";
+import { verificationService } from "@/verificationcases/VerificationService";
 import { useToast } from "@/hooks/use-toast";
 
 type VerificationStep = "role" | "documents" | "review";
