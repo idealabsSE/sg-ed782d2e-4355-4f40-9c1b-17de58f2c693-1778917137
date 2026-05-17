@@ -61,12 +61,14 @@ export function Navigation() {
               >
                 {t("nav.cases")}
               </Link>
-              <Link
-                href="/admin"
-                className="text-sm font-medium text-foreground hover:text-accent transition-colors"
-              >
-                {t("nav.admin")}
-              </Link>
+              {user.isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                >
+                  {t("nav.admin")}
+                </Link>
+              )}
             </>
           )}
 

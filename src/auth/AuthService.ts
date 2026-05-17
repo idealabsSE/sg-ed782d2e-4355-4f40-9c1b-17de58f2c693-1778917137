@@ -6,6 +6,7 @@ export interface AuthUser {
   email: string;
   user_metadata?: any;
   created_at?: string;
+  isAdmin: boolean;
 }
 
 export interface AuthError {
@@ -33,6 +34,12 @@ const getURL = () => {
   return url
 }
 
+// Check if user is admin based on email domain
+const checkIsAdmin = (email: string | undefined): boolean => {
+  if (!email) return false;
+  return email.endsWith('@xtrust.com');
+}
+
 export const authService = {
   // Get current user
   async getCurrentUser(): Promise<AuthUser | null> {
@@ -41,7 +48,8 @@ export const authService = {
       id: user.id,
       email: user.email || "",
       user_metadata: user.user_metadata,
-      created_at: user.created_at
+      created_at: user.created_at,
+      isAdmin: checkIsAdmin(user.email)
     } : null;
   },
 
@@ -70,7 +78,8 @@ export const authService = {
         id: data.user.id,
         email: data.user.email || "",
         user_metadata: data.user.user_metadata,
-        created_at: data.user.created_at
+        created_at: data.user.created_at,
+        isAdmin: checkIsAdmin(data.user.email)
       } : null;
 
       return { user: authUser, error: null };
@@ -98,7 +107,8 @@ export const authService = {
         id: data.user.id,
         email: data.user.email || "",
         user_metadata: data.user.user_metadata,
-        created_at: data.user.created_at
+        created_at: data.user.created_at,
+        isAdmin: checkIsAdmin(data.user.email)
       } : null;
 
       return { user: authUser, error: null };
@@ -162,7 +172,8 @@ export const authService = {
         id: data.user.id,
         email: data.user.email || "",
         user_metadata: data.user.user_metadata,
-        created_at: data.user.created_at
+        created_at: data.user.created_at,
+        isAdmin: checkIsAdmin(data.user.email)
       } : null;
 
       return { user: authUser, error: null };
