@@ -1,6 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
-import { auditService } from "@/services/auditService";
+import { auditService } from "@/securityandaudit/AuditService";
 
 type Verification = Database["public"]["Tables"]["verifications"]["Row"];
 type VerificationInsert = Database["public"]["Tables"]["verifications"]["Insert"];

@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertCircle, CheckCircle2, Clock, FileText, Shield, Users, Database, AlertTriangle } from "lucide-react";
-import { gdprService } from "@/services/gdprService";
+import { gdprService } from "@/privacyandgdpr/GdprService";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { Tables } from "@/integrations/supabase/types";
 

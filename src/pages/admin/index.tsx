@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { AlertCircle, CheckCircle, Flag, FileText, User, MapPin, Loader2 } from "lucide-react";
-import { caseService, type CaseWithDetails } from "@/services/caseService";
+import { caseService, type CaseWithDetails } from "@/verificationcases/CaseService";
 import { verificationService } from "@/services/verificationService";
 import { useToast } from "@/hooks/use-toast";
 

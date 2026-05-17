@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Plus, Building, Users, CheckCircle, Clock, AlertCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { caseService, type CaseWithDetails } from "@/services/caseService";
+import { caseService, type CaseWithDetails } from "@/verificationcases/CaseService";
 import { useToast } from "@/hooks/use-toast";
 
 export default function CasesPage() {

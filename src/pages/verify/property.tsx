@@ -5,7 +5,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { PropertySearchForm } from "@/components/PropertySearchForm";
 import { PropertyProfile } from "@/components/PropertyProfile";
 import { PropertyNotFound } from "@/components/PropertyNotFound";
-import { propertyService } from "@/services/propertyService";
+import { propertyService } from "@/properties/PropertyService";
 import { Loader2 } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 

@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertCircle, Shield, FileText, Search, Download } from "lucide-react";
-import { auditService } from "@/services/auditService";
+import { auditService } from "@/securityandaudit/AuditService";
 
 export function AuditLogDashboard() {
   const [auditLogs, setAuditLogs] = useState<any[]>([]);
