@@ -3,14 +3,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight, RefreshCw } from "lucide-react";
+import { MapPin, FileText, AlertCircle, CheckCircle, ArrowRight, RefreshCw, Shield } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { propertyService } from "@/properties/PropertyService";
+import { nationalLicenseService } from "@/nationallicenses/NationalLicenseService";
+import { NationalLicenseForm } from "@/nationallicenses/ui/NationalLicenseForm";
 import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
 type Property = Database["public"]["Tables"]["properties"]["Row"];
+type NationalLicense = Database["public"]["Tables"]["national_licenses"]["Row"];
 
 interface PropertyProfileProps {
   property: Property;
@@ -21,6 +24,21 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
   const { toast } = useToast();
   const [isChecking, setIsChecking] = useState(false);
   const [spotCheckResult, setSpotCheckResult] = useState<any>(null);
+  const [nationalLicense, setNationalLicense] = useState<NationalLicense | null>(null);
+  const [loadingNational, setLoadingNational] = useState(true);
+
+  useEffect(() => {
+    loadNationalLicense();
+  }, [property.id]);
+
+  const loadNationalLicense = async () => {
+    setLoadingNational(true);
+    const { data, error } = await nationalLicenseService.getByPropertyId(property.id);
+    if (!error && data) {
+      setNationalLicense(data);
+    }
+    setLoadingNational(false);
+  };
 
   const licenseStatus = property.license_status || "none";
 
@@ -42,7 +60,33 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
     },
   };
 
+  const nationalStatusConfig = {
+    active: {
+      variant: "default" as const,
+      icon: CheckCircle,
+      label: t("nationalLicense.status.active"),
+    },
+    pending: {
+      variant: "secondary" as const,
+      icon: AlertCircle,
+      label: t("nationalLicense.status.pending"),
+    },
+    suspended: {
+      variant: "destructive" as const,
+      icon: AlertCircle,
+      label: t("nationalLicense.status.suspended"),
+    },
+    cancelled: {
+      variant: "destructive" as const,
+      icon: AlertCircle,
+      label: t("nationalLicense.status.cancelled"),
+    },
+  };
+
   const status = statusConfig[licenseStatus as keyof typeof statusConfig] || statusConfig.none;
+  const nationalStatus = nationalLicense 
+    ? nationalStatusConfig[nationalLicense.status as keyof typeof nationalStatusConfig] 
+    : null;
 
   const handleSpotCheck = async () => {
     if (!property.license_number || !property.region) {
@@ -205,12 +249,51 @@ export function PropertyProfile({ property }: PropertyProfileProps) {
             </div>
 
             <div className="flex items-start gap-3 p-4 border border-border rounded-lg">
-              <CheckCircle className="h-5 w-5 text-accent mt-0.5" />
-              <div className="space-y-1 flex-1">
-                <p className="text-sm font-medium">{t("property.compliance.registration")}</p>
-                <p className="text-xs text-muted-foreground">
-                  {t("property.compliance.registrationDesc")}
-                </p>
+              <div className="flex items-start justify-between w-full">
+                <div className="flex items-start gap-3 flex-1">
+                  <Shield className="h-5 w-5 text-accent mt-0.5" />
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium">{t("property.compliance.nationalRegistration")}</p>
+                      {nationalStatus && (
+                        <Badge variant={nationalStatus.variant} className="gap-1">
+                          <nationalStatus.icon className="h-3 w-3" />
+                          {nationalStatus.label}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {t("property.compliance.nationalRegistrationDesc")}
+                    </p>
+                    {nationalLicense && (
+                      <div className="text-xs space-y-1 pt-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-muted-foreground">{t("nationalLicense.registrationNumber")}</span>
+                          <span className="font-mono tabular-nums">{nationalLicense.registration_number}</span>
+                        </div>
+                        {nationalLicense.holder_name && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-muted-foreground">{t("nationalLicense.holder")}</span>
+                            <span>{nationalLicense.holder_name}</span>
+                          </div>
+                        )}
+                        {nationalLicense.expires_at && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-muted-foreground">{t("nationalLicense.expiresAt")}</span>
+                            <span>{new Date(nationalLicense.expires_at).toLocaleDateString()}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="pt-2">
+                      <NationalLicenseForm
+                        propertyId={property.id}
+                        existingLicense={nationalLicense}
+                        onSuccess={loadNationalLicense}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
