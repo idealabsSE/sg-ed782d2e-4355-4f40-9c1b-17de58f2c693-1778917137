@@ -4,7 +4,7 @@ import type { Database } from "@/integrations/supabase/types";
 type Organization = Database["public"]["Tables"]["organizations"]["Row"];
 type OrganizationInsert = Database["public"]["Tables"]["organizations"]["Insert"];
 type OrganizationMember = Database["public"]["Tables"]["organization_members"]["Row"];
-type OrganizationRole = Database["public"]["Tables"]["organization_roles"]["Row"];
+export type OrganizationRole = Database["public"]["Tables"]["organization_roles"]["Row"];
 
 export interface OrganizationWithRole extends Organization {
   role: string;
@@ -61,7 +61,7 @@ export class OrganizationService {
     return (data || []).map((item: any) => ({
       ...item.organizations,
       role: item.organization_roles.name,
-      permissions: item.organization_roles.permissions,
+      permissions: (item.organization_roles.permissions || {}) as Record<string, boolean>,
     }));
   }
 
@@ -104,7 +104,7 @@ export class OrganizationService {
     return {
       ...data.organizations,
       role: data.organization_roles.name,
-      permissions: data.organization_roles.permissions,
+      permissions: (data.organization_roles.permissions || {}) as Record<string, boolean>,
     };
   }
 
@@ -197,7 +197,7 @@ export class OrganizationService {
       },
       role: {
         name: item.organization_roles.name,
-        permissions: item.organization_roles.permissions,
+        permissions: (item.organization_roles.permissions || {}) as Record<string, boolean>,
       },
     }));
   }
