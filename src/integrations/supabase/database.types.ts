@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -110,6 +110,7 @@ export type Database = {
           created_at: string | null
           created_by: string | null
           id: string
+          organization_id: string | null
           property_id: string | null
           status: string | null
           updated_at: string | null
@@ -119,6 +120,7 @@ export type Database = {
           created_at?: string | null
           created_by?: string | null
           id?: string
+          organization_id?: string | null
           property_id?: string | null
           status?: string | null
           updated_at?: string | null
@@ -128,6 +130,7 @@ export type Database = {
           created_at?: string | null
           created_by?: string | null
           id?: string
+          organization_id?: string | null
           property_id?: string | null
           status?: string | null
           updated_at?: string | null
@@ -138,6 +141,13 @@ export type Database = {
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cases_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
             referencedColumns: ["id"]
           },
           {
@@ -361,6 +371,150 @@ export type Database = {
           },
         ]
       }
+      organization_members: {
+        Row: {
+          id: string
+          invited_at: string
+          invited_by: string | null
+          joined_at: string | null
+          organization_id: string
+          role_id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          invited_at?: string
+          invited_by?: string | null
+          joined_at?: string | null
+          organization_id: string
+          role_id: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          invited_at?: string
+          invited_by?: string | null
+          joined_at?: string | null
+          organization_id?: string
+          role_id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_members_invited_by_fkey"
+            columns: ["invited_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_members_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_members_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "organization_roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organization_roles: {
+        Row: {
+          created_at: string
+          id: string
+          is_system_role: boolean
+          name: string
+          organization_id: string
+          permissions: Json
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_system_role?: boolean
+          name: string
+          organization_id: string
+          permissions?: Json
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_system_role?: boolean
+          name?: string
+          organization_id?: string
+          permissions?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_roles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          branding: Json | null
+          created_at: string
+          created_by: string
+          id: string
+          locale: string
+          name: string
+          settings: Json | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          branding?: Json | null
+          created_at?: string
+          created_by: string
+          id?: string
+          locale?: string
+          name: string
+          settings?: Json | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          branding?: Json | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          locale?: string
+          name?: string
+          settings?: Json | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organizations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ownership_documents: {
         Row: {
           created_at: string | null
@@ -447,6 +601,7 @@ export type Database = {
           id: string
           license_number: string | null
           license_status: string | null
+          organization_id: string | null
           region: string
           updated_at: string | null
         }
@@ -457,6 +612,7 @@ export type Database = {
           id?: string
           license_number?: string | null
           license_status?: string | null
+          organization_id?: string | null
           region: string
           updated_at?: string | null
         }
@@ -467,10 +623,19 @@ export type Database = {
           id?: string
           license_number?: string | null
           license_status?: string | null
+          organization_id?: string | null
           region?: string
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "properties_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       regional_licenses: {
         Row: {
