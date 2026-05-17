@@ -21,11 +21,11 @@ Implement organization structure for B2B customers per PRD Section 3.3 and Data 
 - [x] Build `organization_members` linking users to orgs
 - [x] Implement `organization_roles` for permission management
 - [x] Add RLS policies for org-scoped data access
-- [ ] Create org creation and setup workflow
-- [ ] Build member invitation system
-- [ ] Implement role assignment interface
-- [ ] Add org-level settings page (locale, branding, notification preferences)
-- [ ] Document org-scoped RLS patterns for new features
+- [x] Create org creation and setup workflow
+- [x] Build member invitation system
+- [x] Implement role assignment interface
+- [x] Add org-level settings page (locale, branding, notification preferences)
+- [x] Document org-scoped RLS patterns for new features
 
 ## Acceptance
 - Users can create and manage organizations
