@@ -1,6 +1,6 @@
 ---
 title: 'Domain Migration: Page Logic Extraction'
-status: todo
+status: done
 priority: high
 type: chore
 tags:
@@ -20,7 +20,7 @@ Next.js requires routes to live in `src/pages/`, but currently, some of these fi
 - [x] Update `src/pages/admin/gdpr.tsx` to simply import and render `<GdprAdminDashboard />`.
 - [x] Create `src/securityandaudit/ui/AuditLogDashboard.tsx` and move the logic and UI from `src/pages/admin/audit.tsx`.
 - [x] Update `src/pages/admin/audit.tsx` to simply import and render `<AuditLogDashboard />`.
-- [ ] Verify that the `/admin/gdpr` and `/admin/audit` routes still render and function perfectly in the browser.
+- [x] Verify that the `/admin/gdpr` and `/admin/audit` routes still render and function perfectly in the browser.
 
 ## Acceptance
 - The files `src/pages/admin/gdpr.tsx` and `src/pages/admin/audit.tsx` act only as Next.js route wrappers.
