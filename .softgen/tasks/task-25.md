@@ -1,25 +1,24 @@
 ---
-title: Route Protection and Navigation Update
-status: done
+title: Auth Triggers & Middleware Hardening
+status: todo
 priority: high
 type: feature
-tags: [auth, routing, frontend]
-created_by: agent
-created_at: 2026-05-15T18:27:01Z
+tags: [auth, security, phase-1]
+created_by: softgen
+created_at: 2026-05-17
 position: 25
 ---
 
 ## Notes
-Implement route protection to ensure all application features (verification flows, cases, admin) require authentication. Unauthenticated users attempting to access protected routes are redirected to the login page.
+Implement the specific authentication requirements detailed in Phase 1.6 of the development plan. This includes backend hooks for user initialization and frontend middleware to enforce strict access control.
 
 ## Checklist
-- [x] Create ProtectedRoute component that checks auth state
-- [x] Wrap all verify/* pages with ProtectedRoute
-- [x] Wrap cases/* pages with ProtectedRoute
-- [x] Wrap admin/* pages with ProtectedRoute
-- [x] Update Navigation to hide protected links when not logged in
+- [ ] Create an Edge Function / Postgres Trigger to automatically create a `profiles` row when a new user signs up in Supabase Auth
+- [ ] Implement Next.js Middleware to protect all non-public routes
+- [ ] Ensure unauthenticated users are seamlessly redirected to the login flow
+- [ ] Verify that public routes (like the property compliance search) remain accessible without auth
 
 ## Acceptance
-- Unauthenticated users attempting to access /verify, /cases, or /admin are redirected to /auth/login.
-- The navigation bar shows "Log in" and "Register" buttons for guests, or user email and "Sign out" for authenticated users.
-- Clicking "Sign out" successfully ends the session and returns the user to a public page.
+- A new user registration automatically yields a corresponding `profiles` record.
+- Unauthenticated users cannot access verification, case, or admin pages.
+- The middleware successfully intercepts and redirects unauthorized requests.

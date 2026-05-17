@@ -1,25 +1,26 @@
 ---
-title: Authentication Pages and State
-status: done
-priority: high
-type: feature
-tags: [auth, frontend]
-created_by: agent
-created_at: 2026-05-15T18:27:01Z
+title: Core Module Architecture & Interfaces
+status: in_progress
+priority: urgent
+type: chore
+tags:
+- architecture
+- phase-1
+created_by: softgen
+created_at: 2026-05-17
 position: 24
 ---
 
 ## Notes
-Create the global authentication state management and user interface for login and registration. This task establishes the foundation for user authentication by setting up context providers and dedicated authentication pages.
+Establish the strict modular monolith architecture defined in Phase 1 of the development plan. This ensures boundaries are maintained and new features are added as modules rather than modifying existing ones. It also sets up the foundational TypeScript interfaces for connectors and providers.
 
 ## Checklist
-- [x] Create AuthContext with login/logout/session state
-- [x] Create login page at /auth/login with email/password form
-- [x] Create registration page at /auth/register with email/password/confirm
-- [x] Update Navigation to show login/logout based on auth state
-- [x] Wrap _app.tsx with AuthProvider
+- [x] Create domain folders in `src/`: `sharedkernel`, `auth`, `organizations`, `i18n`, `properties`, `regionallicenses`, `nationallicenses`, `swedishpersonverification`, `spanishpersonverification`, `documents`, `verificationcases`, `connectors`, `ownershipverification`, `scoringandrules`, `privacyandgdpr`, `securityandaudit`, `admin`, `notifications`
+- [x] Add a `README.md` to every domain folder defining its purpose and public interface
+- [x] Define `DataConnector` interface in `src/connectors/interface/` (fetchSnapshot, normalizeRows, resolvePropertyIdentifier)
+- [x] Define `IdentityProvider` interface in `src/sharedkernel/providers/` (startVerification, getVerificationStatus, normalizeResult, storeEvidenceReference)
 
 ## Acceptance
-- Users can register a new account and are automatically logged in.
-- Users can log in with an existing account.
-- The application tracks the user's logged-in status continuously.
+- The codebase follows the exact folder structure specified in the plan.
+- Every module has a README.md documenting its boundaries.
+- The base TypeScript interfaces for Connectors and Identity Providers are committed and exported.
