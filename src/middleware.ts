@@ -1,11 +1,9 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const response = NextResponse.next({
-    request: {
-      headers: req.headers,
-    },
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
   });
 
   const supabase = createServerClient(
@@ -13,42 +11,23 @@ export async function middleware(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return req.cookies.get(name)?.value;
+        getAll() {
+          return request.cookies.getAll();
         },
-        set(name: string, value: string, options: CookieOptions) {
-          // Update the request cookies
-          req.cookies.set({
-            name,
-            value,
-            ...options,
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+          supabaseResponse = NextResponse.next({
+            request,
           });
-          // Update the response cookies
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          });
-        },
-        remove(name: string, options: CookieOptions) {
-          // Update the request cookies
-          req.cookies.set({
-            name,
-            value: "",
-            ...options,
-          });
-          // Update the response cookies
-          response.cookies.set({
-            name,
-            value: "",
-            ...options,
-          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
         },
       },
     }
   );
 
-  const { pathname } = req.nextUrl;
+  const { pathname } = request.nextUrl;
   
   // This will refresh the session if needed
   const {
@@ -68,9 +47,9 @@ export async function middleware(req: NextRequest) {
     pathname === route || pathname.startsWith(`${route}/`)
   );
 
-  // If route is public, allow access
+  // If route is public, allow access early to prevent unnecessary redirect checks
   if (isPublicRoute) {
-    return response;
+    return supabaseResponse;
   }
 
   // Protected routes - require authentication
@@ -87,7 +66,7 @@ export async function middleware(req: NextRequest) {
 
   // If accessing protected route without user, redirect to login
   if (isProtectedRoute && !user) {
-    const redirectUrl = req.nextUrl.clone();
+    const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/auth/login";
     redirectUrl.searchParams.set("redirectTo", pathname);
     return NextResponse.redirect(redirectUrl);
@@ -97,13 +76,13 @@ export async function middleware(req: NextRequest) {
   if (pathname.startsWith("/admin") && user) {
     const userEmail = user.email || "";
     if (!userEmail.endsWith("@xtrust.com")) {
-      const redirectUrl = req.nextUrl.clone();
+      const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = "/";
       return NextResponse.redirect(redirectUrl);
     }
   }
 
-  return response;
+  return supabaseResponse;
 }
 
 export const config = {
