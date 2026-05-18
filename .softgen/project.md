@@ -20,9 +20,11 @@ A cross-border rental verification SaaS for Spain, bridging Swedish and Spanish 
 - **IN PROGRESS**: Backend infrastructure — data ingestion, document storage, GDPR compliance, audit logging
 - Supabase persistence for all domain entities (Users, Properties, Cases, Verifications)
 - Property lookup and compliance profiling (GVA regional licenses — ingestion system pending)
+- National Rental Registration (NRA) status lookup — manual MVP with `pending_automation` connector scaffold
 - Multi-lingual interface (English, Swedish, Spanish) — fully operational
 - Swedish and Spanish identity/document verification workflows — UI complete, provider integration pending
 - B2B case management for multi-party verifications — UI complete, notification system pending
-- Ownership verification (Nota Simple) workflow — UI complete, document storage system pending
-- Internal reviewer queue for manual trust profile approvals — UI complete, audit logging pending
+- Ownership verification (Nota Simple) workflow — PDF upload/intermediary, identity matching, and reviewer queue
+- Internal reviewer queue for manual trust profile approvals and ambiguous Nota Simple matches
 - Provider abstraction layer for identity verification (TIC/Authway, Verifik → Signicat migration path)
+- GDPR compliance module — DSAR workflows, retention schedules, and unified Vendor Registry

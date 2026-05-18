@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -467,12 +467,16 @@ export type Database = {
           id: string
           last_verified_at: string | null
           notes: string | null
+          nra_verified_at: string | null
+          pending_automation: boolean
           property_id: string
           registered_at: string | null
           registration_number: string
+          requires_review: boolean
           source: string
           status: string
           updated_at: string
+          verified_by: string | null
         }
         Insert: {
           created_at?: string
@@ -481,12 +485,16 @@ export type Database = {
           id?: string
           last_verified_at?: string | null
           notes?: string | null
+          nra_verified_at?: string | null
+          pending_automation?: boolean
           property_id: string
           registered_at?: string | null
           registration_number: string
+          requires_review?: boolean
           source?: string
           status?: string
           updated_at?: string
+          verified_by?: string | null
         }
         Update: {
           created_at?: string
@@ -495,12 +503,16 @@ export type Database = {
           id?: string
           last_verified_at?: string | null
           notes?: string | null
+          nra_verified_at?: string | null
+          pending_automation?: boolean
           property_id?: string
           registered_at?: string | null
           registration_number?: string
+          requires_review?: boolean
           source?: string
           status?: string
           updated_at?: string
+          verified_by?: string | null
         }
         Relationships: [
           {
@@ -508,6 +520,13 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: true
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "national_licenses_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
