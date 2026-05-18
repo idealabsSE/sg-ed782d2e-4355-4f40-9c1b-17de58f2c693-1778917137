@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -53,6 +53,94 @@ export type Database = {
           {
             foreignKeyName: "access_audit_log_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      authority_verification: {
+        Row: {
+          agent_id_number: string | null
+          agent_name: string
+          case_party_id: string
+          created_at: string
+          document_id: string | null
+          id: string
+          mandate_type: string
+          metadata: Json | null
+          notes: string | null
+          principal_id_number: string | null
+          principal_name: string
+          rejection_reason: string | null
+          scope_of_authority: string | null
+          updated_at: string
+          valid_from: string | null
+          valid_until: string | null
+          verification_status: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          agent_id_number?: string | null
+          agent_name: string
+          case_party_id: string
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          mandate_type: string
+          metadata?: Json | null
+          notes?: string | null
+          principal_id_number?: string | null
+          principal_name: string
+          rejection_reason?: string | null
+          scope_of_authority?: string | null
+          updated_at?: string
+          valid_from?: string | null
+          valid_until?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          agent_id_number?: string | null
+          agent_name?: string
+          case_party_id?: string
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          mandate_type?: string
+          metadata?: Json | null
+          notes?: string | null
+          principal_id_number?: string | null
+          principal_name?: string
+          rejection_reason?: string | null
+          scope_of_authority?: string | null
+          updated_at?: string
+          valid_from?: string | null
+          valid_until?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "authority_verification_case_party_id_fkey"
+            columns: ["case_party_id"]
+            isOneToOne: false
+            referencedRelation: "case_parties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "authority_verification_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "person_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "authority_verification_verified_by_fkey"
+            columns: ["verified_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]

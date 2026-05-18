@@ -3,7 +3,10 @@ title: Authority Verification Workflow
 status: todo
 priority: medium
 type: feature
-tags: [verification, relationship, phase-4]
+tags:
+- verification
+- relationship
+- phase-4
 created_by: softgen
 created_at: 2026-05-17
 position: 26
