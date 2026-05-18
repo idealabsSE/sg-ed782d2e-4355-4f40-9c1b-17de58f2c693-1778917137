@@ -63,7 +63,7 @@ export function AuthorityVerificationStep({
     if (file) {
       // Validate file size (max 10MB)
       if (file.size > 10 * 1024 * 1024) {
-        setError(t("errors.fileTooLarge", "File too large. Maximum size is 10MB."));
+        setError(t("errors.fileTooLarge"));
         return;
       }
       setSelectedFile(file);
@@ -74,7 +74,7 @@ export function AuthorityVerificationStep({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedFile) {
-      setError(t("errors.noFileSelected", "Please select a document to upload."));
+      setError(t("errors.noFileSelected"));
       return;
     }
 
@@ -86,17 +86,13 @@ export function AuthorityVerificationStep({
       // Upload document
       const uploadResult = await DocumentService.uploadDocument({
         file: selectedFile,
-        documentType: "other",
-        metadata: {
-          purpose: "authority_verification",
-          mandate_type: mandateType,
-        },
+        documentType: "other"
       });
 
       // Create authority verification record
       await AuthorityVerificationService.create({
         casePartyId,
-        documentId: uploadResult.documentId,
+        documentId: uploadResult.id,
         mandateType: mandateType as any,
         principalName,
         principalIdNumber: principalIdNumber || undefined,
@@ -157,7 +153,7 @@ export function AuthorityVerificationStep({
     return (
       <Badge variant={variants[status] || "secondary"} className="flex items-center gap-1">
         {getStatusIcon(status)}
-        {t(`status.${status}`, status)}
+        {t(`status.${status}`)}
       </Badge>
     );
   };
@@ -166,9 +162,9 @@ export function AuthorityVerificationStep({
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>{t("authorityVerification.title", "Authority Verification")}</CardTitle>
+          <CardTitle>{t("authorityVerification.title")}</CardTitle>
           <CardDescription>
-            {t("authorityVerification.description", "Upload proof of your authority to represent the property owner (Power of Attorney, management contract, etc.)")}
+            {t("authorityVerification.description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -180,7 +176,7 @@ export function AuthorityVerificationStep({
 
           {verifications.length > 0 && (
             <div className="mb-6 space-y-3">
-              <h3 className="font-medium text-sm">{t("authorityVerification.existing", "Submitted Verifications")}</h3>
+              <h3 className="font-medium text-sm">{t("authorityVerification.existing")}</h3>
               {verifications.map((verification) => (
                 <Card key={verification.id}>
                   <CardContent className="pt-4">
@@ -189,19 +185,19 @@ export function AuthorityVerificationStep({
                         <div className="flex items-center gap-2">
                           <FileText className="h-4 w-4 text-muted-foreground" />
                           <span className="font-medium">
-                            {t(`mandateType.${verification.mandate_type}`, verification.mandate_type)}
+                            {t(`mandateType.${verification.mandate_type}`)}
                           </span>
                           {getStatusBadge(verification.verification_status)}
                         </div>
                         <div className="text-sm text-muted-foreground space-y-1">
-                          <div><strong>{t("authorityVerification.principal", "Principal")}:</strong> {verification.principal_name}</div>
-                          <div><strong>{t("authorityVerification.agent", "Agent")}:</strong> {verification.agent_name}</div>
+                          <div><strong>{t("authorityVerification.principal")}:</strong> {verification.principal_name}</div>
+                          <div><strong>{t("authorityVerification.agent")}:</strong> {verification.agent_name}</div>
                           {verification.scope_of_authority && (
-                            <div><strong>{t("authorityVerification.scope", "Scope")}:</strong> {verification.scope_of_authority}</div>
+                            <div><strong>{t("authorityVerification.scope")}:</strong> {verification.scope_of_authority}</div>
                           )}
                           {verification.valid_from && verification.valid_until && (
                             <div>
-                              <strong>{t("authorityVerification.validity", "Valid")}:</strong> {verification.valid_from} - {verification.valid_until}
+                              <strong>{t("authorityVerification.validity")}:</strong> {verification.valid_from} - {verification.valid_until}
                             </div>
                           )}
                         </div>
@@ -215,69 +211,69 @@ export function AuthorityVerificationStep({
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="mandateType">{t("authorityVerification.mandateType", "Document Type")} *</Label>
+              <Label htmlFor="mandateType">{t("authorityVerification.mandateType")} *</Label>
               <Select value={mandateType} onValueChange={setMandateType}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="power_of_attorney">{t("mandateType.power_of_attorney", "Power of Attorney")}</SelectItem>
-                  <SelectItem value="management_contract">{t("mandateType.management_contract", "Management Contract")}</SelectItem>
-                  <SelectItem value="board_resolution">{t("mandateType.board_resolution", "Board Resolution")}</SelectItem>
-                  <SelectItem value="other">{t("mandateType.other", "Other")}</SelectItem>
+                  <SelectItem value="power_of_attorney">{t("mandateType.power_of_attorney")}</SelectItem>
+                  <SelectItem value="management_contract">{t("mandateType.management_contract")}</SelectItem>
+                  <SelectItem value="board_resolution">{t("mandateType.board_resolution")}</SelectItem>
+                  <SelectItem value="other">{t("mandateType.other")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="principalName">{t("authorityVerification.principalName", "Property Owner Name")} *</Label>
+                <Label htmlFor="principalName">{t("authorityVerification.principalName")} *</Label>
                 <Input
                   id="principalName"
                   value={principalName}
                   onChange={(e) => setPrincipalName(e.target.value)}
                   required
-                  placeholder={t("authorityVerification.principalNamePlaceholder", "e.g., John Smith or ABC Property Ltd")}
+                  placeholder={t("authorityVerification.principalNamePlaceholder")}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="principalIdNumber">{t("authorityVerification.principalIdNumber", "Owner ID/Tax Number")}</Label>
+                <Label htmlFor="principalIdNumber">{t("authorityVerification.principalIdNumber")}</Label>
                 <Input
                   id="principalIdNumber"
                   value={principalIdNumber}
                   onChange={(e) => setPrincipalIdNumber(e.target.value)}
-                  placeholder={t("authorityVerification.principalIdNumberPlaceholder", "e.g., B12345678")}
+                  placeholder={t("authorityVerification.principalIdNumberPlaceholder")}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="agentName">{t("authorityVerification.agentName", "Your Name (Representative)")} *</Label>
+                <Label htmlFor="agentName">{t("authorityVerification.agentName")} *</Label>
                 <Input
                   id="agentName"
                   value={agentName}
                   onChange={(e) => setAgentName(e.target.value)}
                   required
-                  placeholder={t("authorityVerification.agentNamePlaceholder", "Your full name")}
+                  placeholder={t("authorityVerification.agentNamePlaceholder")}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="agentIdNumber">{t("authorityVerification.agentIdNumber", "Your ID Number")}</Label>
+                <Label htmlFor="agentIdNumber">{t("authorityVerification.agentIdNumber")}</Label>
                 <Input
                   id="agentIdNumber"
                   value={agentIdNumber}
                   onChange={(e) => setAgentIdNumber(e.target.value)}
-                  placeholder={t("authorityVerification.agentIdNumberPlaceholder", "e.g., 12345678A")}
+                  placeholder={t("authorityVerification.agentIdNumberPlaceholder")}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="validFrom">{t("authorityVerification.validFrom", "Valid From")}</Label>
+                <Label htmlFor="validFrom">{t("authorityVerification.validFrom")}</Label>
                 <Input
                   id="validFrom"
                   type="date"
@@ -287,7 +283,7 @@ export function AuthorityVerificationStep({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="validUntil">{t("authorityVerification.validUntil", "Valid Until")}</Label>
+                <Label htmlFor="validUntil">{t("authorityVerification.validUntil")}</Label>
                 <Input
                   id="validUntil"
                   type="date"
@@ -298,28 +294,28 @@ export function AuthorityVerificationStep({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="scopeOfAuthority">{t("authorityVerification.scope", "Scope of Authority")}</Label>
+              <Label htmlFor="scopeOfAuthority">{t("authorityVerification.scope")}</Label>
               <Input
                 id="scopeOfAuthority"
                 value={scopeOfAuthority}
                 onChange={(e) => setScopeOfAuthority(e.target.value)}
-                placeholder={t("authorityVerification.scopePlaceholder", "e.g., Full property management, Rental operations only")}
+                placeholder={t("authorityVerification.scopePlaceholder")}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="notes">{t("authorityVerification.notes", "Additional Notes")}</Label>
+              <Label htmlFor="notes">{t("authorityVerification.notes")}</Label>
               <Textarea
                 id="notes"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder={t("authorityVerification.notesPlaceholder", "Any additional information about this mandate...")}
+                placeholder={t("authorityVerification.notesPlaceholder")}
                 rows={3}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="document">{t("authorityVerification.document", "Upload Document")} *</Label>
+              <Label htmlFor="document">{t("authorityVerification.document")} *</Label>
               <div className="flex items-center gap-2">
                 <Input
                   id="document"
@@ -336,7 +332,7 @@ export function AuthorityVerificationStep({
                 )}
               </div>
               <p className="text-xs text-muted-foreground">
-                {t("authorityVerification.fileTypes", "Accepted formats: PDF, JPG, PNG. Max size: 10MB.")}
+                {t("authorityVerification.fileTypes")}
               </p>
             </div>
 
@@ -344,12 +340,12 @@ export function AuthorityVerificationStep({
               {uploadingFile ? (
                 <>
                   <Upload className="mr-2 h-4 w-4 animate-pulse" />
-                  {t("authorityVerification.uploading", "Uploading...")}
+                  {t("authorityVerification.uploading")}
                 </>
               ) : (
                 <>
                   <Upload className="mr-2 h-4 w-4" />
-                  {t("authorityVerification.submit", "Submit Verification")}
+                  {t("authorityVerification.submit")}
                 </>
               )}
             </Button>
