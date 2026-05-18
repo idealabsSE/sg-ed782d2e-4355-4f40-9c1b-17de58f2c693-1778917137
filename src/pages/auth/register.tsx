@@ -9,10 +9,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Shield, AlertCircle, CheckCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function RegisterPage() {
   const router = useRouter();
   const { signUp } = useAuth();
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,14 +27,13 @@ export default function RegisterPage() {
     setError(null);
     setSuccess(false);
 
-    // Validation
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("auth.register.errorPasswordMatch"));
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError(t("auth.register.errorPasswordLength"));
       return;
     }
 
@@ -46,7 +47,6 @@ export default function RegisterPage() {
     } else {
       setSuccess(true);
       setLoading(false);
-      // Redirect after short delay
       setTimeout(() => {
         router.push("/");
       }, 2000);
@@ -55,16 +55,16 @@ export default function RegisterPage() {
 
   return (
     <>
-      <SEO title="Register - X Trust" />
+      <SEO title={`${t("auth.register.title")} - X Trust`} />
       <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4 py-12">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-4 text-center">
             <div className="mx-auto w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
               <Shield className="h-6 w-6 text-accent" />
             </div>
-            <CardTitle className="text-2xl">Create an account</CardTitle>
+            <CardTitle className="text-2xl">{t("auth.register.title")}</CardTitle>
             <CardDescription>
-              Register to start verifying properties and identities
+              {t("auth.register.description")}
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -80,17 +80,17 @@ export default function RegisterPage() {
                 <Alert className="border-accent/50 bg-accent/10">
                   <CheckCircle className="h-4 w-4 text-accent" />
                   <AlertDescription className="text-accent">
-                    Account created successfully! Redirecting...
+                    {t("auth.register.successMessage")}
                   </AlertDescription>
                 </Alert>
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("auth.register.email")}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={t("auth.register.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -99,11 +99,11 @@ export default function RegisterPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("auth.register.password")}</Label>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t("auth.register.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -113,11 +113,11 @@ export default function RegisterPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Label htmlFor="confirmPassword">{t("auth.register.confirmPassword")}</Label>
                 <Input
                   id="confirmPassword"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t("auth.register.confirmPasswordPlaceholder")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -128,12 +128,12 @@ export default function RegisterPage() {
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
               <Button type="submit" className="w-full" disabled={loading || success}>
-                {loading ? "Creating account..." : success ? "Success!" : "Register"}
+                {loading ? t("auth.register.submitting") : success ? t("auth.register.success") : t("auth.register.submit")}
               </Button>
               <div className="text-sm text-center text-muted-foreground">
-                Already have an account?{" "}
+                {t("auth.register.hasAccount")}{" "}
                 <Link href="/auth/login" className="text-accent hover:underline">
-                  Log in
+                  {t("auth.register.login")}
                 </Link>
               </div>
             </CardFooter>

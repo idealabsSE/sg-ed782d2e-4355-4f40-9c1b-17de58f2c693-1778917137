@@ -9,10 +9,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Shield, AlertCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function LoginPage() {
   const router = useRouter();
   const { signIn } = useAuth();
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -36,16 +38,16 @@ export default function LoginPage() {
 
   return (
     <>
-      <SEO title="Log In - X Trust" />
+      <SEO title={`${t("auth.login.title")} - X Trust`} />
       <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4 py-12">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-4 text-center">
             <div className="mx-auto w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
               <Shield className="h-6 w-6 text-accent" />
             </div>
-            <CardTitle className="text-2xl">Log in to X Trust</CardTitle>
+            <CardTitle className="text-2xl">{t("auth.login.title")}</CardTitle>
             <CardDescription>
-              Enter your credentials to access your account
+              {t("auth.login.description")}
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -58,11 +60,11 @@ export default function LoginPage() {
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("auth.login.email")}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={t("auth.login.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -71,11 +73,11 @@ export default function LoginPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("auth.login.password")}</Label>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t("auth.login.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -85,12 +87,12 @@ export default function LoginPage() {
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing in..." : "Log in"}
+                {loading ? t("auth.login.submitting") : t("auth.login.submit")}
               </Button>
               <div className="text-sm text-center text-muted-foreground">
-                Don't have an account?{" "}
+                {t("auth.login.noAccount")}{" "}
                 <Link href="/auth/register" className="text-accent hover:underline">
-                  Register
+                  {t("auth.login.register")}
                 </Link>
               </div>
             </CardFooter>
