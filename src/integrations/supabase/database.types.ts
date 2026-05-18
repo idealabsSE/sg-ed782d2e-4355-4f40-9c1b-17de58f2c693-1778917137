@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -511,6 +511,232 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      notification_history: {
+        Row: {
+          clicked_at: string | null
+          created_at: string
+          delivered_at: string | null
+          error_message: string | null
+          id: string
+          locale: string
+          metadata: Json | null
+          notification_type: string
+          opened_at: string | null
+          provider_response: Json | null
+          queue_id: string | null
+          recipient_email: string
+          recipient_user_id: string | null
+          sent_at: string
+          status: string
+          subject: string
+        }
+        Insert: {
+          clicked_at?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          error_message?: string | null
+          id?: string
+          locale: string
+          metadata?: Json | null
+          notification_type: string
+          opened_at?: string | null
+          provider_response?: Json | null
+          queue_id?: string | null
+          recipient_email: string
+          recipient_user_id?: string | null
+          sent_at?: string
+          status: string
+          subject: string
+        }
+        Update: {
+          clicked_at?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          error_message?: string | null
+          id?: string
+          locale?: string
+          metadata?: Json | null
+          notification_type?: string
+          opened_at?: string | null
+          provider_response?: Json | null
+          queue_id?: string | null
+          recipient_email?: string
+          recipient_user_id?: string | null
+          sent_at?: string
+          status?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_history_queue_id_fkey"
+            columns: ["queue_id"]
+            isOneToOne: false
+            referencedRelation: "notification_queue"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_history_recipient_user_id_fkey"
+            columns: ["recipient_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_preferences: {
+        Row: {
+          case_invite: boolean
+          created_at: string
+          digest_frequency: string
+          email_enabled: boolean
+          id: string
+          preferred_locale: string | null
+          review_decision: boolean
+          status_update: boolean
+          updated_at: string
+          user_id: string
+          verification_complete: boolean
+        }
+        Insert: {
+          case_invite?: boolean
+          created_at?: string
+          digest_frequency?: string
+          email_enabled?: boolean
+          id?: string
+          preferred_locale?: string | null
+          review_decision?: boolean
+          status_update?: boolean
+          updated_at?: string
+          user_id: string
+          verification_complete?: boolean
+        }
+        Update: {
+          case_invite?: boolean
+          created_at?: string
+          digest_frequency?: string
+          email_enabled?: boolean
+          id?: string
+          preferred_locale?: string | null
+          review_decision?: boolean
+          status_update?: boolean
+          updated_at?: string
+          user_id?: string
+          verification_complete?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_queue: {
+        Row: {
+          body_html: string
+          body_text: string
+          created_at: string
+          id: string
+          last_error: string | null
+          locale: string
+          max_retries: number
+          next_retry_at: string | null
+          notification_type: string
+          recipient_email: string
+          recipient_user_id: string | null
+          retry_count: number
+          sent_at: string | null
+          status: string
+          subject: string
+          template_data: Json | null
+          updated_at: string
+        }
+        Insert: {
+          body_html: string
+          body_text: string
+          created_at?: string
+          id?: string
+          last_error?: string | null
+          locale: string
+          max_retries?: number
+          next_retry_at?: string | null
+          notification_type: string
+          recipient_email: string
+          recipient_user_id?: string | null
+          retry_count?: number
+          sent_at?: string | null
+          status?: string
+          subject: string
+          template_data?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          body_html?: string
+          body_text?: string
+          created_at?: string
+          id?: string
+          last_error?: string | null
+          locale?: string
+          max_retries?: number
+          next_retry_at?: string | null
+          notification_type?: string
+          recipient_email?: string
+          recipient_user_id?: string | null
+          retry_count?: number
+          sent_at?: string | null
+          status?: string
+          subject?: string
+          template_data?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_queue_recipient_user_id_fkey"
+            columns: ["recipient_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_templates: {
+        Row: {
+          body_html: string
+          body_text: string
+          created_at: string
+          id: string
+          locale: string
+          subject: string
+          template_key: string
+          updated_at: string
+          variables: Json | null
+        }
+        Insert: {
+          body_html: string
+          body_text: string
+          created_at?: string
+          id?: string
+          locale: string
+          subject: string
+          template_key: string
+          updated_at?: string
+          variables?: Json | null
+        }
+        Update: {
+          body_html?: string
+          body_text?: string
+          created_at?: string
+          id?: string
+          locale?: string
+          subject?: string
+          template_key?: string
+          updated_at?: string
+          variables?: Json | null
+        }
+        Relationships: []
       }
       organization_members: {
         Row: {
