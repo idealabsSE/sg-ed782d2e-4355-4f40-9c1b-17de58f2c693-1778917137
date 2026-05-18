@@ -1,6 +1,6 @@
 ---
 title: Notification System (Locale-Aware)
-status: todo
+status: done
 priority: medium
 type: feature
 tags:
@@ -17,14 +17,14 @@ position: 15
 Implement notification system per PRD Section 11.H and multilingual requirements. All notifications must be sent in the recipient's preferred language (English, Swedish, Spanish).
 
 ## Checklist
-- [ ] Create notification templates in EN/SV/ES for all events
-- [ ] Build Edge Function for email sending via Supabase Auth email service
-- [ ] Implement notification types: case_invite, verification_complete, review_decision, status_update
+- [x] Create notification templates in EN/SV/ES for all events
+- [x] Build Edge Function for email sending via Supabase Auth email service
+- [x] Implement notification types: case_invite, verification_complete, review_decision, status_update
 - [x] Add user notification preferences table
 - [x] Create notification queue with retry logic
 - [x] Build notification history and tracking
-- [ ] Implement locale detection: user preference → org default → browser → English
-- [ ] Add notification testing/preview interface for admins
+- [x] Implement locale detection: user preference → org default → browser → English
+- [x] Add notification testing/preview interface for admins
 
 ## Acceptance
 - Case invitations sent in recipient's language
