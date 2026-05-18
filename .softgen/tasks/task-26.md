@@ -1,6 +1,6 @@
 ---
 title: Authority Verification Workflow
-status: todo
+status: done
 priority: medium
 type: feature
 tags:
