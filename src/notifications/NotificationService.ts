@@ -70,12 +70,12 @@ export class NotificationService {
     if (organizationId) {
       const { data: org } = await supabase
         .from("organizations")
-        .select("default_locale")
+        .select("*")
         .eq("id", organizationId)
         .single();
 
-      if (org?.default_locale) {
-        return org.default_locale as NotificationLocale;
+      if (org && (org as any).default_locale) {
+        return (org as any).default_locale as NotificationLocale;
       }
     }
 
@@ -159,15 +159,17 @@ export class NotificationService {
     locale: NotificationLocale
   ): Promise<NotificationTemplate | null> {
     // Try to get template in requested locale
-    let { data, error } = await supabase
+    const { data: requestedData, error: requestedError } = await supabase
       .from("notification_templates")
       .select("*")
       .eq("template_key", templateKey)
       .eq("locale", locale)
       .single();
 
+    let data = requestedData;
+
     // If not found, fallback to English
-    if (error || !data) {
+    if (requestedError || !data) {
       const fallback = await supabase
         .from("notification_templates")
         .select("*")
